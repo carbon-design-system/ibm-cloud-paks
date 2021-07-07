@@ -1,0 +1,98 @@
+////
+/// Filter subcategory styles.
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import '../../../../globals/motion/index';
+@import '../../../Component/mixins';
+
+@import '../../../Button/index';
+@import '../../../ScrollGradient/index';
+
+@import '../../FilterPanelAccordionItem/mixins';
+
+@include security--component($name: filter-subcategory) {
+  /// Scroller padding.
+  /// @type Length
+  $filter-subcategory__spacing__padding: $carbon--spacing-05;
+
+  border-top-width: 0;
+
+  &:last-child {
+    border-bottom-width: 0;
+  }
+
+  &__filter-list {
+    width: calc(100% + #{$filter-subcategory__spacing__padding / 2});
+    padding-left: 0;
+  }
+
+  &__scroller {
+    @include transition($transition-property: height);
+
+    padding-right: $filter-subcategory__spacing__padding;
+  }
+
+  /// Carbon accordion selector.
+  /// @type String
+  $carbon--accordion: '.#{$prefix}--accordion';
+
+  > #{$carbon--accordion} {
+    &__heading {
+      @include filter-panel-accordion-item__heading;
+    }
+
+    &__content {
+      padding: 0 0 0 $filter-subcategory__spacing__padding;
+    }
+  }
+
+  &#{$carbon--accordion}__item--active > #{$carbon--accordion}__heading {
+    color: $text-01;
+  }
+
+  &__button--toggle {
+    /// Button padding.
+    /// @type Length
+    $filter-subcategory__button__spacing__padding: $carbon--spacing-02;
+
+    position: relative;
+    left: -$filter-subcategory__button__spacing__padding;
+    width: 100%;
+    min-height: auto;
+    justify-content: start;
+    padding: $filter-subcategory__button__spacing__padding;
+
+    /// Carbon button selector.
+    /// @type Length
+    $carbon--button: '.#{$prefix}--btn';
+
+    &#{$carbon--button} {
+      /// Carbon button icon selector.
+      /// @type Length
+      $carbon--button__icon: '#{$carbon--button}__icon';
+
+      &,
+      &:active,
+      &:hover {
+        color: $text-02;
+      }
+
+      &,
+      &:hover {
+        > #{$carbon--button__icon} {
+          fill: currentColor;
+        }
+      }
+
+      > #{$carbon--button__icon} {
+        order: -1;
+        margin-right: $carbon--spacing-03;
+        margin-left: 0;
+      }
+    }
+  }
+}

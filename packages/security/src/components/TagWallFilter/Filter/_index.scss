@@ -1,0 +1,16 @@
+////
+/// Filter component.
+/// @group filter
+/// @copyright IBM Security 2019
+////
+
+@import '../../MultiSelect/index';
+@import '../../TextInput/index';
+
+@import '../../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: $filter__name) {
+  @include filter;
+}

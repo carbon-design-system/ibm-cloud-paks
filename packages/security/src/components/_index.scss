@@ -1,0 +1,92 @@
+////
+/// Components entry point.
+/// @group entry
+/// @copyright IBM Security 2019 - 2021
+////
+
+// Application.
+@import 'Breadcrumb/index';
+@import 'Card/index';
+@import 'ComboButton/index';
+@import 'DataDecorator/index';
+@import 'DataTable/index';
+@import 'DelimitedList/index';
+@import 'ErrorPage/index';
+@import 'ExternalLink/index';
+@import 'FilterPanel/index';
+@import 'ICA/index';
+@import 'IconButtonBar/index';
+@import 'IconButton/index';
+@import 'InlineLoading/index';
+@import 'InteractiveTag/index';
+@import 'LayoutModules/index';
+@import 'ListBox/index';
+@import 'Nav/index';
+@import 'NonEntitledSection/index';
+@import 'Notification/index';
+@import 'Panel/index';
+@import 'PanelV2/index';
+@import 'Pill/index';
+@import 'ProfileImage/index';
+@import 'ProgressIndicator/index';
+@import 'ScrollGradient/index';
+@import 'Search/index';
+@import 'SearchBar/index';
+@import 'StackedNotification/index';
+@import 'StatusIcon/index';
+@import 'StatusIndicator/index';
+@import 'StepIndicator/index';
+@import 'StringFormatter/index';
+@import 'SummaryCard/index';
+@import 'Tag/index';
+@import 'TagWall/index';
+@import 'TagWallFilter/index';
+@import 'Tearsheet/index';
+@import 'Tearsheet/TearsheetSmall/index';
+@import 'TimeIndicator/index';
+@import 'Toolbar/index';
+@import 'TrendingCard/index';
+@import 'TruncatedList/index';
+@import 'TypeLayout/index';
+@import 'Wizard/index';
+
+// Platform.
+@import 'Header/index';
+@import 'Shell/index';
+
+/// Carbon proxy.
+@import 'Accordion/index';
+@import 'Button/index';
+@import 'Checkbox/index';
+@import 'CodeSnippet/index';
+@import 'ComboBox/index';
+@import 'ContentSwitcher/index';
+@import 'CopyButton/index';
+@import 'DatePicker/index';
+@import 'Dropdown/index';
+@import 'FileUploader/index';
+@import 'Form/index';
+@import 'Link/index';
+@import 'List/index';
+@import 'Loading/index';
+@import 'Modal/index';
+@import 'MultiSelect/index';
+@import 'NumberInput/index';
+@import 'OverflowMenu/index';
+@import 'Pagination/index';
+@import 'RadioButton/index';
+@import 'Select/index';
+@import 'SkeletonText/index';
+@import 'Slider/index';
+@import 'StructuredList/index';
+@import 'Tabs/index';
+@import 'TextArea/index';
+@import 'TextInput/index';
+@import 'Tile/index';
+@import 'TimePicker/index';
+@import 'Toggle/index';
+@import 'Tooltip/index';
+@import 'UIShell/index';
+
+/// Experimental.
+@import 'Background/index';

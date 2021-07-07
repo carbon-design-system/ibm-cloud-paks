@@ -1,0 +1,146 @@
+import { parameters } from '../../../../.storybook/preview';
+
+import anatomy from './images/anatomy.png';
+
+import variants from './images/variants.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+# ListItemModule
+
+The ListItem is a module designed for flexibility. It consists of optional
+pieces that can be used to design & build variants with universal consistency.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Interactions](#interactions)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+Everything passed in as a
+[render prop](https://reactjs.org/docs/render-props.html) child of
+`ListItemModule` will be rendered.
+
+<Canvas>
+  <Story id="layout-modules-listitemmodule--default" parameters={parameters} />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `ListItemModule` will be forwarded along to the
+underlying list item module container.
+
+#### Columns
+
+Children should be nested inside one or more `Column` as needed. If using more
+than one `Column`, be sure to wrap them in a `<Fragment>` or `<>` when passing
+into a `ListItemModule`.
+
+#### Render props
+
+In order to make sure that everything works as intended, it’s important to pass
+all of the props of the component as fields on the object given to the prop
+getter. For example, to add a `title` child inside a `ListItemModule`:
+
+```jsx
+<h2 {...getLayoutProps({ type: ’title' })}>List title</h2>
+```
+
+Props provided are `title`, `label`, `description`, `component`, `icon`,
+`avatar`, and `farside-column` (added to a `Column` to align its content to the
+farside of the `ListItemModule`).
+
+### Anatomy
+
+We have supplied a default layout for the list item module but it is a very
+flexible component that can accept a number of configurations. Please see
+[variants](#variants) for more details.
+
+1. **Icon (optional):** If an icon is required then it would be placed, in the
+   top left corner.
+2. **Title (optional):** It is not necessary to add a title but, if one is
+   required, type tokens `$body-short-01` `$text-01` have already been supplied.
+   Don’t supplement other typestyles.
+3. **Label (optional):** It is not necessary to add a label but, if one is
+   required, type tokens `$label-01` `$text-02` have already been supplied,
+   don’t supplement other typestyles.
+4. **Top & bottom spacers:** There are top and bottom spacers of 16px
+   (`$spacing-05`) included inside the module.
+5. **Border:** If the ListItemModule is stacked with multiple list modules,
+   there is a 1px border at the top of every module. The color value `$ui-03`
+   has been supplied, don’t supplement other colors.
+
+<img alt="`ICAModule` anatomy" src={anatomy} />
+
+### Variants
+
+We have supplied multiple ‘pieces’ that can be stacked to create different list
+module layouts. Each piece has it’s own spacing tokens included. Note that, in
+some cases, the spacing token is ‘variable’ and is overrided by ListItemModule
+top and bottom spacers.
+
+Most pieces are optional but, when used, they appear in a specific order:
+
+1. The 1px border is included by default at the top of every ListItemModule, and
+   at the bottom of the last module in the list. The color value `$ui-03` has
+   been supplied, don’t supplement other colors.
+2. Icons always appear first, in the top left corner. An icon can be
+   supplemented for a profile image or avatar.
+3. Titles, when used, appear directly below or inline with the icon. Type tokens
+   `$body-short-01` `$text-01` have already been supplied, don’t supplement
+   other typestyles.
+4. Tags or icons can be placed on the far right, inline with the title.
+5. Descriptions `$body-short-01` `$text-02`, labels `$label-01` `$text-02`,
+   groups of avatars or profile pictures can be stacked beneath the title.
+6. You can also nest components, like an ICA, in a LisItemModule. In those cases
+   they should have a 16px spacer (`$spacing-05`) on top.
+
+<img alt="`ICA` variants" src={variants} />
+
+### Grid placement
+
+ListItemModules should span no more than 4 columns, with a 16px overhang on the
+left. Following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation, the content of the module should always align to grid columns.
+
+<Row>
+  <Column>
+    <img alt="`ICAModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`ICAModule` don’t" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<ICAModule>
+  {({ getLayoutProps }) => (
+    <Row>
+      <Column {...getLayoutProps({ lg: 3 })}>
+        <ICA />
+      </Column>
+
+      <Column {...getLayoutProps({ lg: 3 })}>
+        <ICA />
+      </Column>
+
+      <Column {...getLayoutProps({ lg: 3 })}>
+        <ICA />
+      </Column>
+    </Row>
+  )}
+</ICAModule>
+```
+
+<Troubleshooting />

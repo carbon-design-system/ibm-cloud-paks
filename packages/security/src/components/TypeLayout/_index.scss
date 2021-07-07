@@ -1,0 +1,94 @@
+////
+/// Type layout component.
+/// @group type-layout
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/css--reset';
+
+@import '../../globals/border/index';
+@import '../Component/mixins';
+
+@import '../StructuredList/index';
+
+@import 'variables';
+
+@include security--component($name: $type-layout__name) {
+  $root: &;
+
+  margin-bottom: $carbon--layout-03;
+
+  &__row {
+    border-width: 0;
+
+    &:first-of-type > #{$root}__cell {
+      padding-top: 0;
+    }
+
+    &:last-of-type > #{$root}__cell {
+      padding-bottom: 0;
+    }
+  }
+
+  &__cell {
+    @include carbon--type-style($name: body-long-01);
+
+    padding: $carbon--spacing-03 $carbon--spacing-06 $carbon--spacing-03
+      $carbon--spacing-03;
+
+    ul {
+      @include reset;
+
+      list-style: none;
+
+      > li {
+        margin-bottom: $carbon--spacing-03;
+      }
+    }
+  }
+
+  &--lg &__cell {
+    padding: $carbon--spacing-05 $carbon--spacing-06 $carbon--spacing-05
+      $carbon--spacing-05;
+  }
+
+  &--sm,
+  &--xs {
+    &__cell {
+      @include carbon--type-style($name: caption-01);
+    }
+  }
+
+  &--sm &__cell {
+    padding: $carbon--spacing-02 $carbon--spacing-06 $carbon--spacing-02
+      $carbon--spacing-02;
+  }
+
+  &--xs &__cell {
+    padding: $carbon--spacing-02;
+  }
+
+  &__cell:first-of-type {
+    width: 1%;
+    padding-left: 0;
+    white-space: nowrap;
+  }
+
+  &__cell:last-of-type {
+    padding-right: 0;
+    color: $text-01;
+  }
+
+  &--bordered &__row {
+    border-width: $border__sizing__width;
+
+    &:last-child {
+      border-width: 0;
+    }
+  }
+}

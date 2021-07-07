@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-const { sync } = require('glob');
 const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 
@@ -19,16 +18,12 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-controls',
     '@storybook/addon-knobs',
+    '@storybook/addon-links',
     '@storybook/addon-storysource',
     '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],
-
-  stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(
-    (story) =>
-      !story.includes('node_modules') && !story.includes('DISPLAY_NAME')
-  ),
-
+  stories: ['../../**/src/**/*+(-story|.stories).*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       module: {

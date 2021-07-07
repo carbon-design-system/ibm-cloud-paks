@@ -1,0 +1,14 @@
+////
+/// Interactive tag component.
+/// @group tag--interactive
+/// @copyright IBM Security 2019 - 2020
+////
+
+@import '../Tag/index';
+
+@import '../Component/mixins';
+@import 'mixins';
+
+@include security--component($name: $tag--interactive__name) {
+  @include tag--interactive;
+}

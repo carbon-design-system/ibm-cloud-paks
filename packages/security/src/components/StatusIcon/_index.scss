@@ -1,0 +1,96 @@
+////
+/// Status icon component.
+/// @group status-icon
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import '../Loading/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: status-icon) {
+  /// Success color.
+  /// @type Color
+  $status-icon--success__color: $support-02;
+
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    &--success {
+      /// Success transform.
+      /// @type Length
+      $status-icon--success__transform: 0.55;
+
+      box-sizing: border-box;
+
+      padding: $carbon--spacing-03;
+      border: carbon--mini-units($count: 0.25) solid
+        $status-icon--success__color;
+      border-radius: 100%;
+      fill: $icon-01;
+      transform: scale3d(
+        $status-icon--success__transform,
+        $status-icon--success__transform,
+        $status-icon--success__transform
+      );
+    }
+
+    &--color {
+      /// Color icon dimensions.
+      /// @type Color
+      $status-icon__icon--color__sizing__dimensions: carbon--mini-units(
+        $count: 1,
+      );
+
+      /// Types.
+      /// @type Map<String, Color>
+      $status-icon__icon__types: (
+        error: $support-01,
+        info: $support-04,
+        success: $status-icon--success__color,
+        warning: $support-03,
+      );
+
+      width: $status-icon__icon--color__sizing__dimensions;
+      height: $status-icon__icon--color__sizing__dimensions;
+      background-color: $icon-02;
+      border-radius: 50%;
+
+      @each $status-icon__icon__type,
+        $status-icon__icon__color in $status-icon__icon__types
+      {
+        &--#{$status-icon__icon__type} {
+          background-color: $status-icon__icon__color;
+        }
+      }
+    }
+  }
+
+  /// Sizes.
+  /// @type Map<String, number>
+  $status-icon__sizes: (
+    lg: 9,
+    md: 5,
+    sm: 4,
+  );
+
+  @each $status-icon__type, $status-icon__value in $status-icon__sizes {
+    &--#{$status-icon__type} > &__icon {
+      $status-icon__size: carbon--mini-units(
+        $count: $status-icon__value,
+      );
+
+      width: $status-icon__size;
+      height: $status-icon__size;
+    }
+  }
+
+  &__message {
+    margin-left: $carbon--spacing-03;
+  }
+}

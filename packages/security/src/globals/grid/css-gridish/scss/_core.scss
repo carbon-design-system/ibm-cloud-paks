@@ -1,0 +1,101 @@
+@import 'functions.scss';
+@import 'mixins.scss';
+@import 'variables.scss';
+@import 'utilities.scss';
+
+html {
+  font-size: map-get($grid-values, 'rem') * 1px;
+}
+
+body {
+  margin: 0;
+}
+
+.#{$prefix}-container {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: #{map-get($last, breakpoint)}rem;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+.#{$prefix}-container--left {
+  margin-left: 0;
+}
+
+.#{$prefix}-container--right {
+  margin-right: 0;
+}
+
+.#{$prefix}-grid {
+  align-items: flex-start;
+  box-sizing: border-box;
+  @if $includeFlexFallback {
+    display: flex;
+  }
+  display: grid;
+  flex-wrap: wrap;
+  position: relative;
+
+  > * {
+    box-sizing: border-box;
+
+    :last-child,
+    :last-child > :last-child,
+    :last-child > :last-child > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+[class*='#{$prefix}-padding'] {
+  box-sizing: border-box;
+}
+
+// Rules needed in legacy, but needed to change in CSS Grid
+@if $includeFlexFallback {
+  .#{$prefix}-grid > * {
+    width: 100%;
+  }
+
+  @supports (display: grid) {
+    .#{$prefix}-grid {
+      align-items: unset;
+    }
+
+    .#{$prefix}-grid > * {
+      width: initial;
+    }
+  }
+}
+
+// Rules not needed in legacy, but needed in CSS Grid
+@supports (display: grid) {
+  .#{$prefix}-grid > * {
+    height: 100%;
+  }
+}
+
+@include grid-legacy-wrapper($includeFlexFallback) {
+  :root {
+    @include grid-heights-fixed($rows);
+  }
+}
+
+@each $name, $breakpoint in $allBreakpoints {
+  @include media-query($name) {
+    @if is-same-breakpoint($breakpoint, $last) == false {
+      @include grid-legacy-heights($name);
+    }
+    @include grid-legacy-zeros($breakpoint, $name);
+    @include grid-padding($breakpoint);
+    @include grid($breakpoint, $name);
+    @include grid-legacy-columns($breakpoint, $name);
+
+    // Wrap all bleed/break classes and css variables in a CSS Grid support query
+    @include grid-legacy-wrapper($includeFlexFallback) {
+      @include grid-margin($breakpoint, $name);
+    }
+  }
+}

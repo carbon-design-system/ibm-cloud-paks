@@ -1,0 +1,125 @@
+import { parameters } from '../../../../.storybook/preview';
+import { Default } from './TitleBarModule-story';
+
+import anatomy from './images/anatomy.png';
+
+import variants from './images/variants.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+# TitleBarModule
+
+Title bar modules provide interchangeable and reliable headings for establishing
+consistent hierarchies.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+Everything passed in as a child of the title bar module will be rendered.
+
+<Canvas>
+  <Story id="layout-modules-titlebarmodule--default" parameters={parameters} />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `TitleBarModule` will be forwarded along to the
+underlying title bar module containers.
+
+#### `subsection`
+
+Use the `subsection` prop to specify whether a subsection should be used.
+
+<Canvas withSource="none">
+  <Default title="Sub-section title" subsection parameters={parameters} />
+</Canvas>
+
+```jsx
+<TitleBarModule title="Sub-section title" subsection />
+```
+
+#### `element`
+
+This prop specifies a different element to be rendered as a title.
+
+<Canvas withSource="none">
+  <Default element="h3" title="Section 3 title" parameters={parameters} />
+</Canvas>
+
+```jsx
+<TitleBarModule element="h3" title="Section 3 title" />
+```
+
+### Anatomy
+
+1. **Title:** This the title itself, learn more about potential
+   [variants](#variants) above.
+2. **Top spacer:** There is 16px spacer `$spacing-05`, included at the top of
+   the TitleBarModule.
+3. **Bottom spacer:** The 16px spacer `$spacing-05`, included inside the bar,
+   means that the module can be placed flush to edge of the components below.
+
+<img alt="`TitleBarModule` anatomy" src={anatomy} />
+
+### Variants
+
+Actions can be placed inline with the title and a label can also be included
+below.
+
+The title bar can accept two type variants, sub-section title and section title,
+so you shouldn't supplement your own type style.
+
+<img alt="`TitleBarModule` variants" src={variants} />
+
+<Source id="layout-modules-titlebarmodule--variant" />
+
+### Grid placement
+
+Title bar modules span a minimum of 4 columns, following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation.
+
+<Row>
+  <Column>
+    <img alt="`TitleBarModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`TitleBarModule` don’t" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<Column lg={4}>
+  <TitleBarModule title="Section title" />
+</Column>
+```
+
+### Examples
+
+<Row>
+  <Detail />
+  <Overview />
+</Row>
+
+### References
+
+- <LinkTo kind="patterns-iconbuttonbar" story="default">
+    IconButtonBar
+  </LinkTo>
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+
+<Troubleshooting />

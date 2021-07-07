@@ -1,0 +1,91 @@
+////
+/// Date picker component.
+/// @group date-picker
+/// @copyright IBM Security 2018 - 2021
+////
+
+@import 'carbon-components/scss/components/date-picker/date-picker';
+
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/namespace/index';
+
+// Carbon needs to add theming support for this component.
+@include export-namespace($name: datepicker) {
+  .#{$prefix}--date-picker__day.inRange,
+  .flatpickr-day.inRange {
+    background: $selected-ui;
+  }
+
+  .#{$prefix}--date-picker__day.inRange:hover,
+  .flatpickr-day.inRange:hover {
+    background: $hover-selected-ui;
+  }
+
+  .#{$prefix}--date-picker__day.selected,
+  .flatpickr-day.selected {
+    background: $link-01;
+    color: $inverse-01;
+  }
+
+  .#{$prefix}--date-picker__day.selected,
+  .flatpickr-day.endRange.inRange.selected {
+    background: $link-01;
+    color: $inverse-01;
+  }
+
+  .flatpickr-current-month input.cur-year:disabled {
+    color: $disabled-03;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper .numInput:focus,
+  .flatpickr-month .numInputWrapper .numInput:focus,
+  .#{$prefix}--date-picker__day:focus,
+  .flatpickr-day:focus {
+    outline: 1px solid $interactive-04;
+  }
+
+  .#{$prefix}--date-picker__day.today,
+  .flatpickr-day.today {
+    color: $text-01;
+    &::after {
+      background-color: $interactive-04;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.today.selected,
+  .flatpickr-day.today.selected {
+    border: none;
+    color: $inverse-01;
+    &::after {
+      background-color: $inverse-01;
+    }
+  }
+
+  .flatpickr-prev-month svg,
+  .flatpickr-next-month svg {
+    fill: $icon-01;
+
+    &:hover,
+    &:focus,
+    &:active {
+      fill: $interactive-04;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp::after,
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown::after,
+  .flatpickr-month .numInputWrapper span.arrowUp::after,
+  .flatpickr-month .numInputWrapper span.arrowDown::after {
+    border-top-color: $icon-01;
+    border-bottom-color: $icon-01;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp:hover::after,
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown:hover::after,
+  .flatpickr-month .numInputWrapper span.arrowUp:hover::after,
+  .flatpickr-month .numInputWrapper span.arrowDown:hover::after {
+    border-top-color: $interactive-04;
+    border-bottom-color: $interactive-04;
+  }
+}

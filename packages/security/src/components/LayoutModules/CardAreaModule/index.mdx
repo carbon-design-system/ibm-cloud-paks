@@ -1,0 +1,143 @@
+import { parameters } from '../../../../.storybook/preview';
+
+import anatomy from './images/anatomy.png';
+
+import variants from './images/variants.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+# CardAreaModule
+
+The card area module provides a means to orderly present related content and
+information using summary, navigational, or widget cards as the basis.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The card area module can be built using a combination of the `CardAreaModule`,
+[grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow), and
+either the <LinkTo kind="components-card" story="default">`Card`</LinkTo>,
+<LinkTo kind="patterns-summarycard" story="with-primary-label">`SummaryCard`</LinkTo>,
+or [`Tile`](https://react.carbondesignsystem.com/?path=/docs/tile) components.
+
+Everything passed in as a
+[render prop](https://reactjs.org/docs/render-props.html) child of
+`CardAreaModule` will be rendered.
+
+<Canvas>
+  <Story id="layout-modules-cardareamodule--default" parameters={parameters} />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `CardAreaModule` will be forwarded along to the
+underlying card area module container.
+
+#### Render props
+
+In order to make sure that everything works as intended, it’s important to pass
+all of the props of the component as fields on the object given to the prop
+getter. For example, to add a `className`:
+
+```jsx
+<SummaryCard {...getLayoutProps({ className: 'className' })} />
+```
+
+### Anatomy
+
+1. **Cards:** Cards can use any card component, for example `Card`,
+   `SummaryCard`, `Tile`.
+2. **Card spacer (optional):** If there are multiple rows of cards, use the
+   16-pixel spacer `$spacing-05` to separate the rows.
+3. **Bottom spacer:** The 32-pixel spacer `$spacing-07` below the last card row
+   provides the starting point for the layout module positioned directly
+   underneath it.
+
+<img alt="`CardAreaModule` anatomy" src={anatomy} />
+
+### Variants
+
+The card area module can contain a number of complimentary layout modules within
+the parent to create a section of related modules. The following options can be
+used for this purpose. The cards within the module can also be arranged in a
+number of different ways.
+
+1. **[`TitleBarModule`](#references) using section title:** Section titles
+   provide identification for the content
+2. **`TitleBarModule` using `subsection` title:** Sub-section titles provide
+   identification for the sub-content
+3. **[`ActionBarModule`](#references):** Provides a zone for actions related to
+   the cards and content below it.
+
+Feel free to use just one or two of the TitleBarModule or ActionBarModule
+variants, or all three at once as illustrated.
+
+<img alt="`CardAreaModule` variants" src={variants} />
+
+<Source id="layout-modules-cardareamodule--variant" />
+
+### Grid placement
+
+Card area modules can span between 4 and 16 columns. Following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation, the layout module container hangs 16 pixels in the left margin.
+The narrow grid position allows headings and copy outside of containers to align
+with the labels within the card area module.
+
+<Row>
+  <Column>
+    <img alt="`CardAreaModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`CardAreaModule` don't" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<Column lg={16}>
+  <CardAreaModule />
+</Column>
+```
+
+### Examples
+
+<Row>
+  <Detail />
+</Row>
+
+### References
+
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+- <LinkTo kind="components-card" story="default">
+    Card
+  </LinkTo>
+- <LinkTo kind="patterns-summarycard" story="with-primary-label">
+    SummaryCard
+  </LinkTo>
+- [Tile](https://react.carbondesignsystem.com/?path=/docs/tile)
+- [Render Props](https://reactjs.org/docs/render-props.html)
+- <LinkTo kind="layout-modules-titlebarmodule" story="default">
+    TitleBarModule
+  </LinkTo>
+- <LinkTo kind="layout-modules-actionbarmodule" story="default">
+    ActionBarModule
+  </LinkTo>
+- <LinkTo kind="patterns-iconbuttonbar" story="default">
+    IconButtonBar
+  </LinkTo>
+
+<Troubleshooting />

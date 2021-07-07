@@ -1,0 +1,129 @@
+////
+/// Theme variables.
+/// @group theme
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/colors/scss/colors';
+@import '@carbon/themes/scss/theme-maps';
+
+@import '../color/index';
+
+/// Security theme.
+/// @type Map<String, Color>
+$security--theme: $carbon--theme--g100 !default;
+
+/// Default theme.
+/// @type Map<String, Color>
+/// @access private
+$-theme: $security--theme;
+
+/// 'Cool gray' hover overrides.
+/// @type Map<String, Map>
+/// @access private
+$security--cool-gray--hover__overrides: (
+  10: (
+    hover-field: $security--cool-gray-10--hover,
+    hover-ui: $security--cool-gray-10--hover,
+    hover-secondary: $security--cool-gray-80--hover,
+    hover-selected-ui: $security--cool-gray-20--hover,
+    hover-row: $security--cool-gray-10--hover,
+    inverse-hover-ui: $security--cool-gray-80--hover,
+    skeleton-01: $security--cool-gray-10--hover,
+  ),
+  100: (
+    hover-field: $security--cool-gray-90--hover,
+    hover-ui: $security--cool-gray-90--hover,
+    hover-secondary: $security--cool-gray-60--hover,
+    hover-selected-ui: $security--cool-gray-80--hover,
+    hover-row: $security--cool-gray-90--hover,
+    inverse-hover-ui: $security--cool-gray-10--hover,
+    skeleton-01: $security--cool-gray-90--hover,
+  ),
+);
+
+/// Alias for merging themes and tokens.
+/// @param {Map<string, Color>} $theme The theme map to merge.
+/// @param {string} $token-key The token key to merge.
+/// @param {Color} $token The token color to merge.
+/// @returns {Map<string, Color>} The merged theme.
+/// @access private
+@function security--merge-theme($theme, $token-key, $token) {
+  @return map-merge(
+    $map1: $theme,
+    $map2: (
+      $token-key: $token,
+    )
+  );
+}
+
+/// Converts themes with 'gray' color values to 'cool gray'.
+/// @param {Map<string, Color>} $theme A theme map with gray values to convert.
+/// @param {Number} $grade The override grade to use.
+/// @returns {Map<string, Color>} The converted theme.
+/// @access private
+@function security--cool-gray($theme, $grade) {
+  $theme--cool-gray: $theme;
+
+  @each $token-key, $token-value in $theme {
+    @each $color-key,
+      $color-value in map-get($map: $carbon--colors, $key: 'gray')
+    {
+      $override: map-get(
+        $map:
+          map-get(
+            $map: $security--cool-gray--hover__overrides,
+            $key: $grade,
+          ),
+        $key: $token-key,
+      );
+
+      $theme--cool-gray: if(
+        $condition: $override,
+        $if_true:
+          security--merge-theme(
+            $theme: $theme--cool-gray,
+            $token-key: $token-key,
+            $token: $override,
+          ),
+        $if_false:
+          if(
+            $condition: $token-value == $color-value,
+            $if_true:
+              security--merge-theme(
+                $theme: $theme--cool-gray,
+                $token-key: $token-key,
+                $token:
+                  map-get(
+                    $map:
+                      map-get(
+                        $map: $carbon--colors,
+                        $key: 'cool-gray',
+                      ),
+                    $key: $color-key,
+                  ),
+              ),
+            $if_false: $theme--cool-gray,
+          ),
+      );
+    }
+  }
+
+  @return $theme--cool-gray;
+}
+
+/// 'Cool gray' theme.
+/// @type Map<String, Color>
+/// @access private
+$security--theme--cg10: security--cool-gray(
+  $theme: $carbon--theme--g10,
+  $grade: 10,
+);
+
+/// Supported theme definitions.
+/// @type Map<Map, Map>
+/// @access private
+$security--themes: (
+  theme--cg10: $security--theme--cg10,
+  theme--g100: $carbon--theme--g100,
+);

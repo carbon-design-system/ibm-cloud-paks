@@ -1,0 +1,41 @@
+////
+/// Filter category styles.
+/// @group filter-panel
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/font-family';
+@import '@carbon/type/scss/styles';
+
+@import '../../../Accordion/index';
+
+@import '../../../Component/mixins';
+
+@include security--component($name: filter-category) {
+  /// Padding.
+  /// @type Length
+  $filter-category__spacing__padding: $carbon--spacing-03;
+
+  padding-top: $filter-category__spacing__padding;
+  padding-bottom: $filter-category__spacing__padding;
+  border-top: carbon--mini-units($count: 0.125) solid $ui-03;
+
+  &__title {
+    @include carbon--type-style($name: caption-01);
+    @include carbon--font-weight($weight: semibold);
+
+    display: flex;
+    justify-content: space-between;
+    margin-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  &__count {
+    @include carbon--font-weight($weight: regular);
+
+    color: $text-02;
+  }
+}

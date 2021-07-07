@@ -1,0 +1,142 @@
+import { parameters } from '../../../../.storybook/preview';
+
+import anatomy from './images/anatomy.png';
+
+import variants from './images/variants.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+import layoutConsiderations from './images/layout-considerations.png';
+
+# DescriptionModule
+
+Description modules provide a means to orderly layout short-form content.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Layout considerations](#layout-considerations)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The description module can be built using a combination of the
+<LinkTo kind="layout-modules-titlebarmodule" story="default">`TitleBarModule`</LinkTo>
+component and
+[paragraph elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p).
+
+Everything passed in as a
+[render prop](https://reactjs.org/docs/render-props.html) child of
+`DescriptionModule` will be rendered.
+
+<Canvas>
+  <Story
+    id="layout-modules-descriptionmodule--default"
+    parameters={parameters}
+  />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `DescriptionModule` will be forwarded along to the
+underlying description module container.
+
+#### Render props
+
+In order to make sure that everything works as intended, it’s important to pass
+all of the props of the component as fields on the object given to the prop
+getter. For example, to add a `className`:
+
+```jsx
+<p {...getLayoutProps({ className: 'className' })} />
+```
+
+### Anatomy
+
+1. **Title:** This is the title, achieved by using the `TitleBarModule`. Learn
+   more about the
+   <LinkTo kind="layout-modules-titlebarmodule" story="default">TitleBarModule</LinkTo>
+   and potential variants.
+2. **Description:** This is the description itself, the type style is defined so
+   you shouldn’t supplement your own values.
+3. **Bottom spacer:** There is a 32-pixel `$spacing-07` spacer included below
+   the description. Any additional modules can be placed directly underneath.
+
+<img alt="`DescriptionModule` anatomy" src={anatomy} />
+
+### Variants
+
+If necessary, subsection titles can be substituted or used below section titles.
+There are values already supplied for the title type styles so you shouldn’t
+supplement your own. Learn more by reviewing the
+<LinkTo kind="layout-modules-titlebarmodule" story="default" > TitleBarModule.
+</LinkTo>
+
+The description module can also be created without any title.
+
+<img alt="`DescriptionModule` variants" src={variants} />
+
+<Source id="layout-modules-descriptionmodule--variant" />
+
+### Grid placement
+
+Description modules span a minimum of 4 columns, following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation.
+
+<Row>
+  <Column>
+    <img alt="`DescriptionModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`DescriptionModule` don't" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<Column lg={4}>
+  <DescriptionModule />
+</Column>
+```
+
+### Layout considerations
+
+Occassionally a
+[spacing token](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+will need to be included to offset the description module to ensure it
+top-aligns with the adjacent layout container. If a top spacing token is
+necessary, reference the layout module that sits directly above it as the
+starting point for placement.
+
+<img
+  alt="`DescriptionModule` layout considerations"
+  src={layoutConsiderations}
+/>
+
+### Examples
+
+<Row>
+  <Detail />
+</Row>
+
+### References
+
+- <LinkTo kind="layout-modules-titlebarmodule" story="default">
+    TitleBarModule
+  </LinkTo>
+- [The Paragraph element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p)
+- [Render Props](https://reactjs.org/docs/render-props.html)
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+- [Spacing scale](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+
+<Troubleshooting />

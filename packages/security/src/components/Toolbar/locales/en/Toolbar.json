@@ -1,0 +1,17 @@
+{
+  "menu": {
+    "button": "Toggle menu",
+    "tooltip": "Menu"
+  },
+  "settings": {
+    "button": "Toggle settings",
+    "tooltip": "Settings"
+  },
+  "support": {
+    "button": "Toggle support",
+    "tooltip": "Support"
+  },
+  "mainNavigation": {
+    "ariaLabel": "Main navigation"
+  }
+}

@@ -1,0 +1,48 @@
+////
+/// Filter selector styles.
+/// @group filter-panel
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../../../Checkbox/index';
+@import '../../../Component/mixins';
+
+@include security--component($name: filter-selector) {
+  @include carbon--type-style($name: body-short-01);
+
+  display: flex;
+
+  &__checkbox-wrapper {
+    max-width: 100%;
+  }
+
+  &__checkbox {
+    &,
+    > span {
+      width: 100%;
+    }
+
+    > span {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__count {
+    @include carbon--type-style($name: caption-01);
+
+    margin-left: $carbon--spacing-04;
+    color: $text-02;
+  }
+
+  &__label {
+    overflow: hidden;
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

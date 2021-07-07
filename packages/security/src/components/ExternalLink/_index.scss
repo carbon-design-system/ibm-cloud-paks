@@ -1,0 +1,37 @@
+////
+/// External link component.
+/// @group link--external
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/type/scss/styles';
+
+@import '../../globals/rtl/index';
+
+@import '../Link/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: link--external) {
+  @include carbon--type-style($name: body-short-01);
+
+  position: relative;
+  box-shadow: none;
+  word-wrap: break-word;
+
+  &__title {
+    margin-right: $carbon--spacing-02;
+    word-wrap: break-word;
+
+    @include rtl {
+      margin-right: unset;
+      margin-left: $carbon--spacing-02;
+    }
+  }
+
+  &__icon {
+    fill: currentColor;
+    vertical-align: middle;
+  }
+}

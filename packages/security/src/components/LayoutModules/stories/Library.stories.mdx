@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import descriptionModule from './images/description-module.png';
+import descriptionListModule from './images/description-list-module.png';
+import titleBarModule from './images/title-bar-module.png';
+import icaModule from './images/ica-module.png';
+import buttonClusterModule from './images/button-cluster-module.png';
+import actionBarModule from './images/action-bar-module.png';
+import cardAreaModule from './images/card-area-module.png';
+import listItemModule from './images/list-item-module.png';
+
+import getTitle, { LIBRARY } from '.';
+
+<Meta title={getTitle(LIBRARY)} />
+
+# Layout modules library
+
+<Row>
+  <Column className="library__type" lg={10}>
+    Layout modules are the combination of components, spacing tokens, icons, and
+    type styles packaged as a single grid-aware, unit. They are designed to work
+    in tandem with other modules and Carbon components so that they can be
+    quickly arranged into layouts with the confidence that they are consistent
+    with all of our other pages.
+  </Column>
+</Row>
+
+<Row className="library__row">
+
+<Column lg={5}>
+  <LinkTo
+    className="storybook__link--image"
+    kind="layout-modules-actionbarmodule"
+    story="default">
+    <img alt="Link to action bar module" src={actionBarModule} />
+  </LinkTo>
+</Column>
+
+<Column lg={5}>
+  <LinkTo
+    className="storybook__link--image"
+    kind="layout-modules-buttonclustermodule"
+    story="default">
+    <img alt="Link to button cluster module" src={buttonClusterModule} />
+  </LinkTo>
+</Column>
+
+<Column lg={5}>
+  <LinkTo
+    className="storybook__link--image"
+    kind="layout-modules-cardareamodule"
+    story="default">
+    <img alt="Link to card area module" src={cardAreaModule} />
+  </LinkTo>
+</Column>
+
+</Row>
+
+<Row className="library__row">
+   <Column lg={5}>
+    <LinkTo
+      className="storybook__link--image"
+      kind="layout-modules-descriptionmodule"
+      story="default"
+    >
+      <img alt="Link to description module" src={descriptionModule} />
+    </LinkTo>
+  </Column>
+
+<Column lg={5}>
+  <LinkTo
+    className="storybook__link--image"
+    kind="layout-modules-descriptionlistmodule"
+    story="default">
+    <img alt="Link to description list module" src={descriptionListModule} />
+  </LinkTo>
+</Column>
+
+<Column lg={5}>
+  <LinkTo
+    className="storybook__link--image"
+    kind="layout-modules-icamodule"
+    story="default">
+    <img alt="Link to ICA module" src={icaModule} />
+  </LinkTo>
+</Column>
+
+</Row>
+
+<Row className="library__row">
+  <Column lg={5}>
+    <LinkTo
+      className="storybook__link--image"
+      kind="layout-modules-titlebarmodule"
+      story="default">
+      <img alt="Link to title bar module" src={titleBarModule} />
+    </LinkTo>
+  </Column>
+  <Column lg={5}>
+    <LinkTo
+      className="storybook__link--image"
+      kind="layout-modules-listitemmodule"
+      story="default">
+      <img alt="Link to list item module" src={listItemModule} />
+    </LinkTo>
+  </Column>
+</Row>

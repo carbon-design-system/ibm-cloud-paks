@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSearch Events displays search results when value typed in 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Events hides results when filter has been toggled 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Rendering accepts initial search value 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Rendering displays message when no filters match search value 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Rendering partially matches any string 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Rendering partially matches any string 2`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Rendering renders 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSearch Rendering should not overwrite \`labels\` when unique props defined 1`] = `ShallowWrapper {}`;

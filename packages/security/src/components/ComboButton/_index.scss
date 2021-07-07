@@ -1,0 +1,130 @@
+////
+/// Combo button component.
+/// @group combo-button
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../Button/index';
+@import '../Dropdown/index';
+@import '../OverflowMenu/index';
+
+@import '../Component/mixins';
+
+@import 'variables';
+
+@include security--component($name: $combo-button__name) {
+  $root: &;
+
+  position: relative;
+
+  display: inline-flex;
+
+  & &--primary {
+    @include text-overflow;
+
+    display: flex;
+    flex: 1;
+  }
+
+  &__group {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  &__icon {
+    fill: $icon-03;
+    pointer-events: none;
+  }
+
+  & &__overflow-menu {
+    width: 3rem;
+    margin-left: 1px;
+    background-color: $interactive-01;
+
+    &:hover,
+    &.#{$prefix}--overflow-menu--open {
+      background-color: $hover-primary;
+    }
+
+    &:active {
+      background-color: $active-primary;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options {
+    display: grid;
+    width: 100%;
+    background-color: $ui-02;
+    outline: unset;
+
+    &__option {
+      display: inherit;
+
+      &:hover {
+        background-color: $hover-selected-ui;
+      }
+
+      &:first-child #{$root}-item__wrapper {
+        border-top-color: transparent;
+      }
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+
+  &-item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  & &-item__wrapper {
+    @include text-overflow();
+
+    display: flex;
+    width: unset;
+    max-width: unset;
+    justify-content: space-between;
+    padding: 0;
+    border-top: 1px solid $active-ui;
+    border-bottom: 1px solid transparent;
+    margin: 0 1rem;
+    outline: unset;
+
+    &:focus {
+      @include focus-outline('outline');
+
+      padding: 0 1rem;
+      border-color: transparent;
+      margin: 0;
+    }
+
+    &:hover {
+      background-color: unset;
+      color: $text-01;
+    }
+
+    > span + svg {
+      flex-shrink: 0;
+      margin-left: $carbon--spacing-03;
+    }
+
+    &:disabled,
+    &:disabled:hover {
+      color: $text-03;
+
+      svg {
+        fill: $text-03;
+      }
+    }
+  }
+}

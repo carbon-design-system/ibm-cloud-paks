@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel Rendering does not render the open panel if \`shouldPanelOpen\` is false 1`] = `
+<DocumentFragment>
+  <button
+    class="bx--btn bx--btn--primary"
+    tabindex="0"
+    type="button"
+  >
+    toggle panel
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Panel Rendering renders correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="bx--btn bx--btn--primary"
+    tabindex="0"
+    type="button"
+  >
+    toggle panel
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Panel Rendering renders the HTML of the node's subtree 1`] = `
+<React.Fragment>
+  <Button
+    dangerDescription="danger"
+    disabled={false}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    onClick={[Function]}
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="button"
+  >
+    toggle panel
+  </Button>
+  <PanelController
+    active={false}
+  >
+    <PanelContainer
+      className={null}
+      closeButton={
+        Object {
+          "label": "Label",
+          "onClick": [Function],
+        }
+      }
+      disableEscape={false}
+      hasScrollingContent={false}
+      labels={Object {}}
+      primaryButton={null}
+      renderFooter={null}
+      rootNode={
+        <body>
+          <div>
+            <button
+              class="bx--btn bx--btn--primary"
+              tabindex="0"
+              type="button"
+            >
+              toggle panel
+            </button>
+          </div>
+        </body>
+      }
+      subtitle="Label"
+      title="Label"
+    >
+      <PanelContent>
+        Panel content
+      </PanelContent>
+    </PanelContainer>
+  </PanelController>
+</React.Fragment>
+`;
+
+exports[`Panel Rendering renders the open panel 1`] = `
+<DocumentFragment>
+  <button
+    class="bx--btn bx--btn--primary"
+    tabindex="0"
+    type="button"
+  >
+    toggle panel
+  </button>
+</DocumentFragment>
+`;

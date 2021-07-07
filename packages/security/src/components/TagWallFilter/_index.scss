@@ -1,0 +1,16 @@
+////
+/// Tag wall filter component.
+/// @group tag-wall-filter
+/// @copyright IBM Security 2019
+////
+
+@import './Filter/index';
+@import '../Tearsheet/TearsheetSmall/index';
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: tag-wall-filter) {
+  @include tag-wall-filter;
+}

@@ -1,0 +1,13 @@
+////
+/// Filter panel group styles.
+/// @group filter-panel
+/// @copyright IBM Security 2020
+////
+
+@import '../../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: filter-panel-group) {
+  @include filter-panel-group;
+}

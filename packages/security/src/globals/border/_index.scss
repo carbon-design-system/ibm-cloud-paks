@@ -1,0 +1,13 @@
+////
+/// Border.
+/// @group border
+/// @copyright IBM Security 2019 - 2020
+////
+
+@import '@carbon/layout/scss/convert';
+
+/// Border width helper.
+/// @type Length
+$border__sizing__width: carbon--rem(
+  $px: 1px,
+);

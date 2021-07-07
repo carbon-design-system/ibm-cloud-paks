@@ -1,0 +1,39 @@
+////
+/// Breadcrumb component.
+/// @group breadcrumb
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/namespace/index';
+
+@include export-namespace($name: breadcrumb) {
+  .#{$prefix}--breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+
+    /// Link selector.
+    /// @type String
+    $carbon--breadcrumb__item__link: '#{&}-item > .#{$prefix}--link';
+
+    &,
+    #{$carbon--breadcrumb__item__link} {
+      @include carbon--type-style($name: caption-01);
+    }
+
+    #{$carbon--breadcrumb__item__link} {
+      overflow: hidden;
+      max-width: 40ex;
+      text-overflow: ellipsis;
+
+      &:visited {
+        color: $link-01;
+      }
+    }
+  }
+}

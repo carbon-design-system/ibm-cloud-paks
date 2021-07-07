@@ -1,0 +1,24 @@
+////
+/// Skeleton text component.
+/// @group skeleton-text
+/// @copyright IBM Security 2018
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import 'carbon-components/scss/components/skeleton/skeleton-text';
+
+@import '../../globals/namespace/index';
+
+@include export-namespace($name: skeleton-text) {
+  .#{$prefix}--skeleton {
+    &__text {
+      height: carbon--mini-units($count: 1);
+    }
+
+    &__heading {
+      height: carbon--mini-units($count: 2);
+    }
+  }
+}

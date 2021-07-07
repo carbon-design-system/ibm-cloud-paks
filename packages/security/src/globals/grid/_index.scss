@@ -1,0 +1,144 @@
+////
+/// Grid helpers.
+/// @group grid
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/grid/scss/mixins';
+
+@import '../deprecate/index';
+@import '../feature-flags/index';
+@import '../namespace/index';
+
+@import 'css-gridish/scss/functions';
+@import 'css-gridish/scss/mixins';
+@import 'css-gridish/scss/utilities';
+@import 'css-gridish/scss/variables';
+
+@if feature-flag-enabled($feature: $grid__name) {
+  @include export-namespace($name: $grid__name) {
+    $deprecate: deprecate(
+      $actual: '@ibmduo/grid',
+      $expected: '@carbon/grid',
+      $url:
+        'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/grid.md#feature-flags',
+    );
+
+    html {
+      font-size: map-get($grid-values, 'rem') * 1px;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .#{$prefix}-container {
+      width: 100vw;
+      max-width: #{map-get($last, breakpoint)}rem;
+      box-sizing: border-box;
+      margin-right: auto;
+      margin-left: auto;
+      overflow-x: hidden;
+    }
+
+    .#{$prefix}-container--left {
+      margin-left: 0;
+    }
+
+    .#{$prefix}-container--right {
+      margin-right: 0;
+    }
+
+    .#{$prefix}-grid {
+      position: relative;
+      display: grid;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      @if $includeFlexFallback {
+        display: flex;
+      }
+
+      > * {
+        box-sizing: border-box;
+
+        :last-child,
+        :last-child > :last-child,
+        :last-child > :last-child > :last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    [class*='#{$prefix}-padding'] {
+      box-sizing: border-box;
+    }
+
+    @if $includeFlexFallback {
+      .#{$prefix}-grid > * {
+        width: 100%;
+      }
+
+      @supports (display: grid) {
+        .#{$prefix}-grid {
+          align-items: unset;
+        }
+
+        .#{$prefix}-grid > * {
+          width: initial;
+        }
+      }
+    }
+
+    @supports (display: grid) {
+      .#{$prefix}-grid > * {
+        height: 100%;
+      }
+    }
+
+    @include grid-legacy-wrapper($includeFlexFallback) {
+      :root {
+        @include grid-heights-fixed($rows);
+      }
+    }
+
+    @each $name, $breakpoint in $allBreakpoints {
+      @include media-query($name) {
+        @if is-same-breakpoint($breakpoint, $last) == false {
+          @include grid-legacy-heights($name);
+        }
+        @include grid-legacy-zeros($breakpoint, $name);
+        @include grid-padding($breakpoint);
+        @include grid($breakpoint, $name);
+        @include grid-legacy-columns($breakpoint, $name);
+
+        @include grid-legacy-wrapper($includeFlexFallback) {
+          @include grid-margin($breakpoint, $name);
+        }
+      }
+    }
+
+    @supports (display: grid) {
+      .#{$prefix}-grid > *,
+      .#{$prefix}-grid > [class*='#{$prefix}-grid__col--'] {
+        width: initial;
+        min-width: initial;
+        max-width: initial;
+
+        &.#{$prefix}-grid {
+          display: grid;
+        }
+      }
+
+      .#{$prefix}-grid > [class*='#{$prefix}-grid__height--'] {
+        height: unset;
+        min-height: initial;
+        max-height: unset;
+      }
+    }
+
+    .#{$prefix}-grid > script {
+      display: none;
+    }
+  }
+}

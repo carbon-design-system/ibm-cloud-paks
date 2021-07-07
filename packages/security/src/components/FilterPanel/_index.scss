@@ -1,0 +1,35 @@
+////
+/// Filter panel styles.
+/// @group filter-panel
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/type/scss/styles';
+
+@import 'LEGACY_FilterPanel/index';
+
+@import 'FilterPanelLabel/index';
+@import 'FilterPanelGroup/index';
+@import 'FilterPanelAccordion/index';
+@import 'FilterPanelAccordionItem/index';
+@import 'FilterPanelCheckbox/index';
+@import 'FilterPanelCheckboxWithOverflowMenu/index';
+@import 'FilterPanelSearch/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: filter-panel) {
+  &__title {
+    $filter-panel__spacing: $carbon--spacing-04;
+
+    @include carbon--type-style($name: body-short-01);
+
+    margin-top: $filter-panel__spacing;
+    margin-bottom: $filter-panel__spacing;
+  }
+
+  &__search {
+    margin-bottom: $carbon--spacing-05;
+  }
+}

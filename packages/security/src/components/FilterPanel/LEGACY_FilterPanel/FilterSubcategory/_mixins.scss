@@ -1,0 +1,17 @@
+////
+/// Filter subcategory mixins.
+/// @copyright IBM Security 2020
+////
+
+@import '@carbon/layout/scss/spacing';
+
+@import '../../FilterPanelAccordionItem/mixins';
+
+@mixin filter-subcategory {
+  @include filter-panel-accordion-item;
+
+  &__filter-list {
+    width: calc(100% + #{$carbon--spacing-05 / 2});
+    padding-left: 0;
+  }
+}

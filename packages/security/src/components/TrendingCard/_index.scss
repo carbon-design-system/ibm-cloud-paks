@@ -1,0 +1,56 @@
+////
+/// Trending card.
+/// @group trending-card
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../../globals/motion/index';
+@import '../../platform/body/mixins';
+@import '../Component/mixins';
+
+@include security--component($name: trending-card) {
+  @include carbon--motion($name: standard, $mode: productive);
+
+  display: block;
+  min-width: carbon--mini-units($count: 24);
+  padding: $carbon--spacing-05;
+  background-color: $ui-01;
+  text-decoration: unset;
+  transition-duration: $transition-duration--fast;
+
+  &:focus,
+  &:hover {
+    background-color: $hover-ui;
+  }
+
+  &:focus {
+    @include focus-outline($type: outline);
+  }
+
+  &__title,
+  &__subtitle {
+    @include text-overflow;
+  }
+
+  &__title {
+    @include carbon--type-style($name: body-long-01);
+
+    margin-top: 0;
+    margin-bottom: $carbon--spacing-02;
+    color: $body__color__text;
+  }
+
+  &__subtitle {
+    @include carbon--type-style($name: caption-01);
+
+    color: $text-02;
+  }
+}

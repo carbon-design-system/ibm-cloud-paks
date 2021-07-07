@@ -1,0 +1,19 @@
+////
+/// Shell component.
+/// @group shell
+/// @copyright IBM Security 2019
+////
+
+@import '../Breadcrumb/index';
+@import '../Button/index';
+@import '../Header/index';
+@import '../Link/index';
+@import '../Toolbar/index';
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: shell) {
+  @include shell;
+}

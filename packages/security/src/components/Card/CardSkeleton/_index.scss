@@ -1,0 +1,21 @@
+////
+/// Card skeleton component.
+/// @group card-skeleton
+/// @copyright IBM Security 2019
+////
+
+@import '@carbon/layout/scss/spacing';
+
+@import '../../Component/mixins';
+
+@import '../mixins';
+
+@include security--component($name: #{$card__name}--skeleton) {
+  &__wrapper {
+    display: flex;
+  }
+
+  &__text--inline {
+    margin-right: $carbon--spacing-03;
+  }
+}

@@ -1,0 +1,135 @@
+////
+/// Type.
+/// @group type
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/type/scss/classes';
+@import '@carbon/type/scss/type';
+
+@import 'carbon-components/scss/globals/scss/css--font-face';
+
+@import '../deprecate/index';
+@import '../feature-flags/index';
+@import '../namespace/index';
+
+// TODO: `2.x` - To be removed.
+
+/// Monospaced font family.
+/// @type string
+$font-family-mono: carbon--font-family(
+  $name: mono,
+);
+
+/// Sans serif font family.
+/// @type string
+$font-family-sans-serif: carbon--font-family(
+  $name: sans,
+);
+
+/// Serif font family.
+/// @type string
+$font-family-serif: carbon--font-family(
+  $name: serif,
+);
+
+/// Font family deprecation mappings.
+/// @type Map<string, string>
+$font-family-deprecation-map: (
+  mono:
+    carbon--font-family(
+      $name: mono,
+    ),
+  serif:
+    carbon--font-family(
+      $name: serif,
+    ),
+);
+
+/// Font weight deprecation mappings.
+/// @type Map<string, Length>
+$font-weight-deprecation-map: (
+  light:
+    carbon--font-weight(
+      $weight: light,
+    ),
+  semibold:
+    carbon--font-weight(
+      $weight: semibold,
+    ),
+);
+
+/// Type style deprecation mappings.
+/// @type Map<string, string>
+$type-style-deprecation-map: (
+  a: caption-01,
+  b: body-long-01,
+  c: body-short-02,
+  d: heading-02,
+  e: productive-heading-03,
+  f: expressive-heading-04,
+  g: productive-heading-04,
+  h: productive-heading-05,
+  i: display-01,
+  j: display-03,
+  k: display-04,
+);
+
+///
+/// Deprecation warning method for `type-scale-item`.
+/// @param {string} $scale-item The deprecated scale item parameter.
+///
+@mixin type-scale-item($scale-item) {
+  $name: map-get(
+    $map: $type-style-deprecation-map,
+    $key: $scale-item,
+  );
+
+  $deprecate: deprecate(
+    $actual: 'type-scale-item($scale-item: #{$scale-item})',
+    $expected: 'carbon--type-style($name: #{$name})',
+    $url:
+      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/type.md#functions',
+  );
+
+  @include carbon--type-style($name: $name);
+}
+
+// TODO: `2.x` - Deprecate after teams have migrated to `@carbon/type`.
+
+@if feature-flag-enabled($feature: $type__name) {
+  @include export-namespace($name: $type__name) {
+    [class*='#{$type__name}'] {
+      margin-top: 0;
+    }
+
+    .#{$type__name} {
+      font-family: carbon--font-family($name: sans);
+
+      &-italic {
+        font-style: italic;
+      }
+
+      @each $font-family-class,
+        $font-family-value in $font-family-deprecation-map
+      {
+        &-#{$font-family-class} {
+          font-family: $font-family-value;
+        }
+      }
+    }
+
+    @each $font-weight-class, $font-weight-value in $font-weight-deprecation-map
+    {
+      .#{$type__name}-#{$font-weight-class} {
+        font-weight: $font-weight-value;
+      }
+    }
+
+    @each $type-class, $type-style-name in $type-style-deprecation-map {
+      .#{$type__name}-#{$type-class} {
+        @include carbon--type-style($fluid: true, $name: $type-style-name);
+      }
+    }
+  }
+}

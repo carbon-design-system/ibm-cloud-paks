@@ -1,0 +1,71 @@
+////
+/// Non etitled section component.
+/// @group ne-section
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/grid/scss/mixins';
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/scale';
+
+@import '../IconButton/index';
+@import '../Link/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: ne-section) {
+  $root: &;
+
+  @include carbon--grid();
+
+  min-height: carbon--mini-units($count: 25);
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  &__content-wrapper {
+    padding: carbon--mini-units($count: 12) $carbon--spacing-07
+      $carbon--spacing-09 $carbon--spacing-07;
+  }
+
+  &__title,
+  &__sub-title,
+  &__description {
+    color: $ui-05;
+    font-weight: normal;
+    line-height: initial;
+  }
+
+  &__title {
+    @include carbon--type-scale($step: 6);
+
+    margin: 0 0 carbon--mini-units($count: 6.5) 0;
+  }
+
+  &__sub-title {
+    @include carbon--type-scale($step: 1);
+
+    margin: 0 0 $carbon--spacing-03 0;
+  }
+
+  &__description {
+    @include carbon--type-scale($step: 4);
+
+    margin: 0 0 $carbon--spacing-07 0;
+  }
+
+  &__link {
+    display: inline-flex;
+    padding: 0;
+    margin: 0 0 $carbon--spacing-02 0;
+
+    &__icon {
+      width: auto;
+      height: carbon--mini-units($count: 2.5);
+      align-self: center;
+      padding: 0 $carbon--spacing-03 0 0;
+    }
+  }
+}

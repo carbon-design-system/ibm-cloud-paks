@@ -1,0 +1,201 @@
+////
+/// Panel mixins.
+/// @group panel
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/motion';
+
+@import '../../globals/namespace/index';
+@import '../../globals/rtl/index';
+@import '../../globals/theme/mixins';
+
+@import '../ComboButton/variables';
+@import '../Header/mixins';
+@import '../IconButton/mixins';
+@import '../Toolbar/mixins';
+
+@mixin panel--v2 {
+  /// Width.
+  /// @type Length
+  $panel__sizing__width: carbon--mini-units(
+    $count: 40,
+  );
+
+  /// Padding.
+  /// @type Length
+  $panel__spacing__padding: $carbon--spacing-05;
+
+  /// Header width.
+  /// @type Length
+  $panel__header__sizing__width: $panel__sizing__width -
+    ($panel__spacing__padding * 2);
+
+  /// Content border color.
+  /// @type Color
+  $panel__content__color__border: $ui-04;
+
+  /// Content border sizing.
+  /// @type Color
+  $panel__content__sizing__border: carbon--mini-units(
+    $count: 0.125,
+  );
+
+  @include security--theme--cg10__cg100;
+
+  position: fixed;
+  z-index: z($layer: modal);
+  top: 0;
+  right: 0;
+
+  display: flex;
+  width: $panel__sizing__width;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $ui-01;
+  color: $body__color__text;
+  outline: none;
+
+  @include rtl {
+    right: unset;
+    left: 0;
+  }
+
+  &__container #{$header__namespace}__container {
+    width: calc(
+      #{$header__sizing__width} - #{$toolbar__sizing__width} - #{$panel__sizing__width}
+    );
+
+    > #{$header__namespace} {
+      width: inherit;
+    }
+  }
+
+  &__button--close:only-child {
+    @include rtl {
+      margin-right: auto;
+      margin-left: unset;
+    }
+
+    margin-left: auto;
+  }
+
+  &__header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: $panel__header__sizing__width;
+    box-sizing: border-box;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-top: $panel__spacing__padding;
+    padding-bottom: $panel__spacing__padding;
+    border-bottom: $panel__content__sizing__border solid
+      $panel__content__color__border;
+    margin-right: $panel__spacing__padding;
+    margin-left: $panel__spacing__padding;
+
+    &__container--title {
+      width: $panel__header__sizing__width -
+        carbon--mini-units($count: $button--icon__sizing__dimensions) -
+        $panel__spacing__padding;
+    }
+
+    &--title,
+    &--subtitle {
+      color: $text-01;
+      word-break: break-word;
+    }
+
+    &--title {
+      @include carbon--type-style($name: productive-heading-03);
+
+      display: block;
+      margin-top: $carbon--spacing-05;
+      margin-bottom: $carbon--spacing-04;
+    }
+
+    &--subtitle {
+      @include carbon--type-style($name: body-short-01);
+    }
+  }
+
+  &__body {
+    flex-grow: 1;
+    margin-top: carbon--mini-units($count: 11);
+    overflow-y: auto;
+
+    &--content {
+      @include carbon--type-style($name: caption-01);
+
+      padding-top: $panel__spacing__padding;
+      padding-bottom: $panel__spacing__padding;
+      border-bottom: $panel__content__sizing__border solid
+        $panel__content__color__border;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    &--footer {
+      margin-bottom: $carbon--layout-04;
+    }
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: $panel__sizing__width;
+
+    &__button {
+      flex-grow: 1;
+    }
+
+    #{get-component-namespace($component-name: $combo-button__name)} {
+      width: 100%;
+    }
+  }
+
+  &__transition {
+    &--appear,
+    &--enter {
+      opacity: 0;
+      transform: translate3d($panel__sizing__width, 0, 0);
+
+      &--active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        transition: all $duration--moderate-02;
+        transition-timing-function: carbon--motion(
+          $name: entrance,
+          $mode: expressive
+        );
+      }
+    }
+
+    &--leave {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+
+      &--active {
+        opacity: 0;
+        transform: translate3d($panel__sizing__width, 0, 0);
+        transition: all $duration--moderate-02;
+        transition-timing-function: carbon--motion(
+          $name: exit,
+          $mode: expressive
+        );
+      }
+    }
+  }
+}

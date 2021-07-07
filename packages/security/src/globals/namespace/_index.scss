@@ -1,0 +1,69 @@
+////
+/// Assets related to namespacing selectors.
+/// @group namespace
+/// @copyright IBM Security 2019
+////
+
+@import '@carbon/import-once/scss/import-once';
+
+/// The prefix used to namespace all selectors in the CSS.
+/// @type String
+/// @access private
+$namespace: 'security--';
+
+///
+/// Appends the namespace for a component to another namespace.
+/// @param {String} $component-namespace The component namespace to append to.
+/// @param {String} $component-name The component namespace to append.
+/// @return {string} The appended component namespace to return.
+///
+@function append-component-namespace($component-namespace, $component-name) {
+  @return '#{$component-namespace}__#{$component-name}';
+}
+
+///
+/// Creates the namespace for a component using the global namespace.
+/// @param {String} $component-name The component namespace to create.
+/// @return {String} The component namespace to return.
+///
+@function get-component-namespace($component-name) {
+  @return '.#{$namespace}#{$component-name}';
+}
+
+/// Exports the content once to the unique namespace.
+/// @param {String} $name The name to namespace.
+/// @content The content to export once.
+/// @example scss
+///   @include export-namespace($name: platform) {
+///     body {
+///       background-color: $body__color__background;
+///     }
+///   }
+/// @output css
+///   body {
+///     background-color: #fff;
+///   }
+///
+@mixin export-namespace($name) {
+  @include exports($name: #{$namespace}#{$name}) {
+    @content;
+  }
+}
+
+/// Sets the namespace prefix on to the given selector.
+/// @param {String} $selector The selector string to namespace.
+/// @content The styles for the namespaced component class name.
+/// @example scss
+///   @include namespace($selector: header) {
+///     background-color: $header__color__background;
+///   }
+/// @output css
+///   .security--header {
+///     background-color: #fff;
+///   }
+///
+@mixin namespace($selector) {
+  #{get-component-namespace($component-name: $selector)} {
+    @content;
+  }
+}

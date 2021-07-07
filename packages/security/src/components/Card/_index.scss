@@ -1,0 +1,16 @@
+////
+/// Card component.
+/// @group card
+/// @copyright IBM Security 2019
+////
+
+@import '../SkeletonText/index';
+@import 'CardSkeleton/index';
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: $card__name) {
+  @include card;
+}

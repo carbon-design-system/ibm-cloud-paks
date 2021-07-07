@@ -1,0 +1,60 @@
+////
+/// Theme helpers.
+/// @group theme
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/themes/scss/mixins';
+
+@import '../../components/Component/mixins';
+@import '../deprecate/index';
+@import '../feature-flags/index';
+
+@import 'variables';
+
+/// Carbon theme.
+/// @type Map<String, Color>
+$carbon--theme: $-theme;
+
+@include carbon--theme;
+
+@import 'carbon-components/scss/globals/scss/theme-tokens';
+@import 'mixins';
+
+// TODO: `2.x` - To be removed after the `theme` function is deprecated.
+
+/// Dark theme.
+/// @type String
+/// @access private
+/// @deprecated
+$theme: dark;
+
+/// Handles theme switching between light and dark.
+/// @param {Color} $light The light color to use.
+/// @param {Color} $dark The dark color to use.
+/// @returns {Color} The determined theme color to use.
+/// @access private
+/// @deprecated
+@function theme($light, $dark) {
+  $deprecate: deprecate(
+    $actual: 'theme',
+    $expected: '@carbon/themes/scss/themes',
+    $url:
+      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/themes.md#functions',
+  );
+
+  @return if($theme == dark, $dark, $light);
+}
+
+@include security--component($name: input__background__color--light) {
+  @include input__background-color;
+}
+
+@if feature-flag-enabled($feature: $theme__name) {
+  // Outputs the relevant classes for each supported theme - `$carbon--theme` is required to be set before this can occur.
+  @each $theme, $tokens in $security--themes {
+    @include security--component($name: $theme) {
+      @include security--generate-css-custom-properties($theme: $tokens);
+    }
+  }
+}

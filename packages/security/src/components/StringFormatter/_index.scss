@@ -1,0 +1,33 @@
+////
+/// String formatter.
+/// @group string-formatter
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../TooltipDefinition/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: string-formatter) {
+  display: inline-block;
+  text-align: left;
+
+  &--truncate {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 80ch;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  &__tooltip > .#{$prefix}--tooltip__trigger {
+    border-width: 0;
+    color: currentColor;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+}

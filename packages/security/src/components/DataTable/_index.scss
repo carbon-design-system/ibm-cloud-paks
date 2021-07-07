@@ -1,0 +1,43 @@
+////
+/// Data table component.
+/// @group data-table
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/namespace/index';
+
+@import '../Component/mixins';
+
+@import '../Checkbox/index';
+@import '../IconButton/index';
+@import '../ScrollGradient/index';
+@import '../Search/index';
+
+@import 'carbon-components/scss/components/data-table-v2/data-table-v2';
+
+@include security--component($name: data-table) {
+  &__table-wrapper {
+    z-index: 0;
+  }
+
+  &__overflow-cell .#{$prefix}--overflow-menu {
+    z-index: z($layer: overlay);
+  }
+
+  .#{$prefix}--data-table {
+    background-color: $ui-03;
+
+    &-content {
+      overflow: unset;
+    }
+
+    &.#{$prefix}--skeleton th {
+      border-bottom-width: 0;
+    }
+  }
+}

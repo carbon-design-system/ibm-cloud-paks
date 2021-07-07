@@ -1,0 +1,24 @@
+////
+/// Header component.
+/// @group header
+/// @copyright IBM Security 2019
+////
+
+@import '../Accordion/index';
+@import '../Button/index';
+@import '../IconButton/index';
+@import '../Link/index';
+@import '../ProfileImage/index';
+
+@import 'HeaderListItem/index';
+@import 'HeaderNotification/index';
+@import 'HeaderPopoverHeader/index';
+@import 'HeaderPopoverLinkSecondary/index';
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: $header__name) {
+  @include header;
+}

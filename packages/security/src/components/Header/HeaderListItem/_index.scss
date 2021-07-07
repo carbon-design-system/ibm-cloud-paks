@@ -1,0 +1,15 @@
+////
+/// Header list item component.
+/// @group header__list__item
+/// @copyright IBM Security 2019
+////
+
+@import '../../Component/mixins';
+
+@import '../mixins';
+
+@import 'mixins';
+
+@include security--component($name: #{$header__name}__list__item) {
+  @include header__list__item;
+}

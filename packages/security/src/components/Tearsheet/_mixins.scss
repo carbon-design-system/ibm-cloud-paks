@@ -1,0 +1,241 @@
+////
+/// Tearsheet mixins.
+/// @group tearsheet
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/type/scss/index';
+@import '@carbon/themes/scss/tokens';
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/border/index';
+@import '../../globals/motion/index';
+@import '../../globals/theme/mixins';
+
+@import '../Panel/mixins';
+
+/// Name.
+/// @type String
+$tearsheet__name: tearsheet;
+
+/// Background color.
+/// @type Color
+$tearsheet__color__background: $ui-01;
+
+/// Margin.
+/// @type Length
+$tearsheet__sizing__margin: $carbon--spacing-05;
+
+/// Position base.
+/// @type Length
+$tearsheet__position__base: 50%;
+
+/// Position.
+/// @type Length
+$tearsheet__position: calc(
+  -#{$tearsheet__position__base} - #{$tearsheet__sizing__margin}
+);
+
+$tearsheet__layer: z(
+  $layer: modal,
+);
+
+@mixin tearsheet--base {
+  /// Dimensions.
+  /// @type Length
+  $tearsheet__sizing__dimensions: $carbon--layout-04;
+
+  @include input__background-color;
+
+  position: fixed;
+  z-index: $tearsheet__layer;
+  bottom: 0;
+  left: $tearsheet__position__base;
+
+  display: flex;
+  width: calc(100% - #{$tearsheet__sizing__margin * 2});
+  height: calc(100vh - #{$tearsheet__sizing__dimensions});
+  min-height: carbon--mini-units($count: 40);
+  margin-right: $tearsheet__sizing__margin;
+  margin-left: $tearsheet__sizing__margin;
+  background-color: $tearsheet__color__background;
+  transform: translate3d(#{$tearsheet__position}, 0, 0);
+
+  &__transition {
+    &--enter,
+    &--leave {
+      &--active {
+        @include transition($transition-property: transform);
+      }
+    }
+
+    &--enter {
+      transform: translate3d(#{$tearsheet__position}, 100%, 0);
+
+      &--active {
+        transform: translate3d(#{$tearsheet__position}, 0, 0);
+      }
+    }
+
+    &--leave {
+      transform: translate3d(#{$tearsheet__position}, 0, 0);
+
+      &--active {
+        transform: translate3d(#{$tearsheet__position}, 100%, 0);
+      }
+    }
+  }
+
+  &__button--close {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  > .#{$prefix}--loading-overlay {
+    position: absolute;
+    background-color: $overlay-01;
+  }
+
+  &__loading .#{$prefix}--loading__stroke {
+    stroke: $inverse-focus-ui;
+  }
+}
+
+@mixin tearsheet__button {
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+}
+
+@mixin tearsheet {
+  /// Text color.
+  /// @type Length
+  $tearsheet__color__text: $text-01;
+
+  /// Padding.
+  /// @type Length
+  $tearsheet__spacing__padding: $carbon--spacing-06;
+
+  /// Footer padding.
+  /// @type Length
+  $tearsheet__footer__spacing__padding: $carbon--spacing-03;
+
+  @include tearsheet--base;
+
+  &__button {
+    @include tearsheet__button;
+
+    max-width: carbon--mini-units($count: 33);
+
+    &--tertiary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+
+      &__text {
+        @include carbon--type-style($name: label-01);
+
+        color: $tearsheet__color__text;
+      }
+    }
+  }
+
+  &__sidebar {
+    position: relative;
+    width: 33%;
+    max-width: carbon--mini-units($count: 33);
+    padding: $tearsheet__spacing__padding;
+    border-right: $border__sizing__width solid $ui-background;
+
+    &__title {
+      @include carbon--type-style($name: productive-heading-03);
+
+      margin-top: 0;
+      margin-bottom: $carbon--spacing-02;
+    }
+
+    &__subtitle {
+      @include carbon--type-style($name: caption-01);
+
+      margin-top: 0;
+      margin-bottom: $tearsheet__spacing__padding;
+      color: $text-02;
+    }
+
+    &__footer {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      padding-bottom: $tearsheet__footer__spacing__padding;
+      padding-left: $tearsheet__footer__spacing__padding;
+    }
+  }
+
+  &__main {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: $tearsheet__spacing__padding;
+
+    &__title,
+    &__content {
+      padding-left: $tearsheet__spacing__padding;
+    }
+
+    &__scroll-gradient {
+      width: 100%;
+
+      &__content {
+        padding-right: $tearsheet__spacing__padding;
+      }
+    }
+
+    &__title {
+      @include carbon--type-style($name: productive-heading-04);
+
+      padding-right: $tearsheet__spacing__padding;
+      margin-top: 0;
+      margin-bottom: $tearsheet__spacing__padding;
+    }
+
+    &__content {
+      position: relative;
+      display: flex;
+      width: 100%;
+      min-height: 0;
+      box-sizing: border-box;
+      flex: 1;
+      margin-top: $tearsheet__spacing__padding;
+    }
+  }
+
+  &__container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &__start,
+    &__end {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__start {
+      flex-direction: column;
+    }
+
+    &__end {
+      flex-grow: 1;
+      flex-wrap: wrap;
+    }
+  }
+}

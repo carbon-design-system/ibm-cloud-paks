@@ -1,0 +1,16 @@
+////
+/// Toolbar component.
+/// @group toolbar
+/// @copyright IBM Security 2019
+////
+
+@import '../IconButton/index';
+@import '../Nav/index';
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: toolbar) {
+  @include toolbar;
+}

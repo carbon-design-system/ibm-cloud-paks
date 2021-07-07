@@ -1,0 +1,29 @@
+////
+/// Interactive tag mixins.
+/// @group tag--interactive
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/themes/scss/tokens';
+@import '../../globals/namespace/index';
+
+/// Name.
+/// @type String
+$tag--interactive__name: tag--interactive;
+
+/// Namespace.
+/// @type String
+$tag--interactive__namespace: get-component-namespace(
+  $component-name: $tag--interactive__name,
+);
+
+@mixin tag--interactive {
+  &--default {
+    background-color: $active-ui;
+    color: $text-01;
+  }
+
+  > .#{$prefix}--tag__close-icon:hover {
+    background-color: inherit;
+  }
+}

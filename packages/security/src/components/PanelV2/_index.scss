@@ -1,0 +1,16 @@
+////
+/// Panel component.
+/// @group panel
+/// @copyright IBM Security 2019
+////
+
+@import '../Button/index';
+@import '../IconButton/index';
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: panel--v2) {
+  @include panel--v2;
+}

@@ -1,0 +1,22 @@
+////
+/// Globals entry point.
+/// @group entry
+/// @copyright IBM Security 2019 - 2020
+////
+
+@import 'theme/index';
+@import 'variables/index';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import 'color/index';
+@import 'grid/index';
+@import 'layout/index';
+@import 'motion/index';
+@import 'type/index';
+
+@import 'border/index';
+@import 'deprecate/index';
+@import 'feature-flags/index';
+@import 'namespace/index';
+@import 'rtl/index';

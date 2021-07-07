@@ -1,0 +1,142 @@
+import { parameters } from '../../../../.storybook/preview';
+import { Default } from './DescriptionListModule-story';
+
+import anatomy from './images/anatomy.png';
+
+import variants from './images/variants.png';
+import sizeVariants from './images/size-variants.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+import layoutConsiderations from './images/layout-considerations.png';
+
+# DescriptionListModule
+
+Description list modules provide a means to orderly layout terms and
+definitions.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Layout considerations](#layout-considerations)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The description list module can be built using a combination of the
+<LinkTo kind="components-typelayout" story="default">`TypeLayout`</LinkTo> and
+<LinkTo kind="layout-modules-titlebarmodule" story="default">`TitleBarModule`</LinkTo>
+components.
+
+Everything passed in as a child of `DescriptionListModule` will be rendered.
+
+<Canvas>
+  <Story
+    id="layout-modules-descriptionlistmodule--default"
+    parameters={parameters}
+  />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `DescriptionListModule` will be forwarded along to
+the underlying description list module container.
+
+### Anatomy
+
+1. **Term:** This is the label, it should left aligned to a grid column.
+2. **Gutter:** There is always a 32px gutter between the ‘term’ and
+   ‘description’ columns. In this way, the ‘description’ column is always offset
+   from the term column by exactly 32px.
+3. **Description:** The description placement is relative to the term label, it
+   will always fall 32px to the right of the term.
+4. **Bottom spacer:** The 16-pixel spacer `$spacing-05` below the ‘Row spacer’
+   row provides the starting point for the layout module positioned directly
+   underneath it. At the end of the description list module both the ‘Row
+   spacer’ and ‘Bottom spacer’ join together to create a 32px buffer.
+
+<img alt="`DescriptionListModule` anatomy" src={anatomy} />
+
+### Variants
+
+A description list can have a title, both section and subsection title bars can
+precede the type layout. Learn more by reviewing the
+<LinkTo kind="layout-modules-titlebarmodule" story="default" > TitleBarModule.
+</LinkTo>
+
+<img alt="`DescriptionListModule` title variants" src={variants} />
+<Source id="layout-modules-descriptionlistmodule--variant" />
+
+**Coming soon...**  
+There is also a `stacked` variant for narrower spaces, it's ideal for 4
+columns.  
+The `short` variant works in scenarios where there is less vertical space.
+
+<img alt="`DescriptionListModule` size variants" src={sizeVariants} />
+
+### Grid placement
+
+Description list modules span a minimum of 4 columns, following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation. The ‘term’ column should left align with the grid, the
+‘description’ column will be offset from the ‘term’ column by exactly 32px. It
+may or may not align to the grid, don’t force it.
+
+<Row>
+  <Column>
+    <img alt="`DescriptionListModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`DescriptionListModule` don't" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<Column lg={4}>
+  <DescriptionListModule />
+</Column>
+```
+
+### Layout considerations
+
+Occassionally
+[spacing tokens](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+will need to be included to offset the description list module to ensure it
+top-aligns with the adjacent layout container. If top spacing tokens are
+necessary, reference the layout module that sits directly above it as the
+starting point for placement.
+
+<img
+  alt="`DescriptionListModule` layout considerations"
+  src={layoutConsiderations}
+/>
+
+### Examples
+
+<Row>
+  <Detail />
+  <Overview />
+</Row>
+
+### References
+
+- <LinkTo kind="components-typelayout" story="default">
+    TypeLayout
+  </LinkTo>
+- <LinkTo kind="layout-modules-titlebarmodule" story="default">
+    TitleBarModule
+  </LinkTo>
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+- [Spacing scale](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+
+<Troubleshooting />

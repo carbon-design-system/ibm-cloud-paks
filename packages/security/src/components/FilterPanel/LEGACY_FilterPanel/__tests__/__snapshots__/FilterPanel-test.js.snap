@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterPanel renders with no title 1`] = `ShallowWrapper {}`;
+
+exports[`FilterPanel renders with title 1`] = `ShallowWrapper {}`;
+
+exports[`FilterPanel should overwrite \`labels\` when unique props defined 1`] = `ShallowWrapper {}`;

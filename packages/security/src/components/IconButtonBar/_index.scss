@@ -1,0 +1,64 @@
+////
+/// Icon button bar component.
+/// @group icon-button-bar
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../IconButton/index';
+@import '../OverflowMenu/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: icon-button-bar) {
+  /// Variation dimensions.
+  /// @type Map<String, Length>
+  $icon-button-bar__sizes: (
+    'sm': 4,
+    'md': 5,
+    'lg': 6,
+    'xl': 8,
+  );
+
+  $root: &;
+
+  display: flex;
+  overflow: none;
+
+  @each $icon-button-bar__size,
+    $icon-button-bar__unit in $icon-button-bar__sizes
+  {
+    /// Variation dimensions.
+    /// @type Length
+    $icon-button-bar__sizing__dimensions: carbon--mini-units(
+      $count: $icon-button-bar__unit,
+    );
+
+    &--#{$icon-button-bar__size} {
+      min-width: $icon-button-bar__sizing__dimensions;
+
+      #{$root}__overflow-menu {
+        width: $icon-button-bar__sizing__dimensions;
+        height: $icon-button-bar__sizing__dimensions;
+      }
+    }
+
+    &__overflow-menu-options--#{$icon-button-bar__size}.#{$prefix}--overflow-menu-options::after {
+      width: $icon-button-bar__sizing__dimensions;
+    }
+  }
+
+  &__divider {
+    display: flex;
+    // divider should remain transparent
+    width: 3px;
+    justify-content: center;
+  }
+
+  &__divider__inner {
+    width: 1px;
+    background-color: $ui-03;
+  }
+}

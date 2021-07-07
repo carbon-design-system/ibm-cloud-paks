@@ -1,0 +1,246 @@
+////
+/// Icon button mixins.
+/// @group button--icon
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/layout';
+
+@import '../../globals/motion/index';
+
+@import '../Tooltip/mixins';
+
+@import 'variables';
+
+/// Dimensions.
+/// @type Length
+$button--icon__sizing__dimensions: 5;
+
+/// Transition timing function.
+/// @type Length
+$button--icon__transition__timing-function: $timing-function;
+
+/// Generates the dimensions for an icon button variation and it's tooltip positioning.
+/// @param {number} $count The units to generate the dimensions for.
+@mixin button--icon__size($count) {
+  $button--icon__sizing__dimensions--size: carbon--mini-units(
+    $count: $count,
+  );
+
+  width: $button--icon__sizing__dimensions--size;
+  height: $button--icon__sizing__dimensions--size;
+
+  + #{$button--icon__namespace}__tooltip::before {
+    left: $button--icon__sizing__dimensions--size / 2;
+  }
+}
+
+/// Icon button mixin.
+@mixin button--icon {
+  /// Tooltip center position.
+  /// @type Length
+  $button--icon__tooltip__position--center: 50%;
+
+  /// Sizing.
+  /// @type Length
+  $button--icon__tooltip__position__sizing: carbon--mini-units(
+    $count: 0.5,
+  );
+
+  /// Tooltip end position.
+  /// @type Length
+  $button--icon__tooltip__position--end: calc(
+    100% + #{$button--icon__tooltip__position__sizing}
+  );
+
+  @include button-reset;
+  @include button--icon__size($count: $button--icon__sizing__dimensions);
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  border: 0;
+  background-color: inherit;
+  color: $icon-01;
+  fill: currentColor;
+  transition: $transition-duration $button--icon__transition__timing-function
+    background-color;
+
+  &:hover,
+  &:focus {
+    background-color: $hover-ui;
+  }
+
+  &:focus {
+    @include focus-outline('outline');
+
+    border-width: 0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    fill: $disabled-03;
+
+    &,
+    &:hover,
+    &:focus {
+      background-color: $disabled-01;
+    }
+
+    &:focus {
+      outline-width: 0;
+    }
+  }
+
+  &--lg {
+    @include button--icon__size($count: 6);
+  }
+
+  &--sm {
+    @include button--icon__size($count: 4);
+  }
+
+  &--xl {
+    @include button--icon__size($count: 8);
+  }
+
+  &--tooltip {
+    &::before,
+    &::after {
+      z-index: z($layer: floating);
+    }
+
+    &::before {
+      @include tooltip;
+
+      content: attr(aria-label);
+    }
+
+    &::after {
+      @include tooltip__arrow;
+
+      opacity: 0;
+    }
+
+    &:focus,
+    &:hover {
+      &::before,
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &--top,
+    &--bottom {
+      &::before,
+      &::after {
+        left: $button--icon__tooltip__position--center;
+      }
+    }
+
+    &--left,
+    &--right {
+      &::before,
+      &::after {
+        top: $button--icon__tooltip__position--center;
+      }
+    }
+
+    &--top {
+      &::before,
+      &::after {
+        bottom: $button--icon__tooltip__position--end;
+      }
+
+      &::before {
+        transform: translate(
+          -$button--icon__tooltip__position--center,
+          -$tooltip__arrow__sizing__border
+        );
+      }
+
+      &::after {
+        border-top-color: $tooltip__color__background;
+        transform: translate(
+          -$button--icon__tooltip__position--center,
+          $tooltip__arrow__sizing__border
+        );
+      }
+    }
+
+    &--right {
+      &::before,
+      &::after {
+        left: $button--icon__tooltip__position--end;
+      }
+
+      &::before {
+        transform: translate(
+          $tooltip__arrow__sizing__border,
+          -$button--icon__tooltip__position--center
+        );
+      }
+
+      &::after {
+        border-right-color: $tooltip__color__background;
+        transform: translate(
+          -$tooltip__arrow__sizing__border,
+          -$button--icon__tooltip__position--center
+        );
+      }
+    }
+
+    &--bottom {
+      &::before,
+      &::after {
+        top: $button--icon__tooltip__position--end;
+      }
+
+      &::before {
+        transform: translate(
+          -$button--icon__tooltip__position--center,
+          $tooltip__arrow__sizing__border
+        );
+      }
+
+      &::after {
+        border-bottom-color: $tooltip__color__background;
+        transform: translate(
+          -$button--icon__tooltip__position--center,
+          -$tooltip__arrow__sizing__border
+        );
+      }
+    }
+
+    &--left {
+      &::before,
+      &::after {
+        right: $button--icon__tooltip__position--end;
+      }
+
+      &::before {
+        transform: translate(
+          -$tooltip__arrow__sizing__border,
+          -$button--icon__tooltip__position--center
+        );
+      }
+
+      &::after {
+        border-left-color: $tooltip__color__background;
+        transform: translate(
+          $tooltip__arrow__sizing__border,
+          -$button--icon__tooltip__position--center
+        );
+      }
+    }
+  }
+}

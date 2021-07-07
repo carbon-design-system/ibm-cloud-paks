@@ -1,0 +1,24 @@
+////
+/// Description list module.
+/// @group description-list-module
+/// @copyright IBM Security 2020
+////
+
+@import '@carbon/layout/scss/spacing';
+
+@import '../../../globals/namespace/index';
+@import '../../Component/mixins';
+@import '../../TypeLayout/variables';
+
+@import '../variables';
+
+@include security--component(
+  $name: #{$layout-modules__name}--description-list
+) {
+  padding-bottom: $carbon--layout-03;
+
+  // TODO: `3.x` - Remove bottom margin from the `TypeLayout` component to allow it to be handled by the layout module.
+  > #{get-component-namespace($component-name: $type-layout__name)} {
+    margin-bottom: 0;
+  }
+}

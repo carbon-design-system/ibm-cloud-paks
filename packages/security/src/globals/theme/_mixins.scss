@@ -1,0 +1,162 @@
+////
+/// Theme mixins.
+/// @group theme
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/themes/scss/mixins';
+@import '@carbon/themes/scss/tokens';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../components/IconButton/variables';
+
+@import '../deprecate/index';
+@import '../feature-flags/index';
+@import '../namespace/index';
+
+@import 'variables';
+
+/// Changes background color for form elements.
+/// @param {Color} [$background-color=$ui-02] The background color to use.
+/// @example scss
+///   body {
+///     @include input__background-color;
+///   }
+@mixin input__background-color($background-color: $ui-02) {
+  %input__background-color {
+    background-color: $background-color;
+  }
+
+  // Carbon components.
+  .#{$prefix} {
+    // `DatePicker`.
+    &--date-picker__input,
+
+    // `Dropdown`.
+    &--dropdown,
+
+    /// `NumberInput`.
+    &--number input[type='number'],
+
+    // `Search`.
+    &--search-input,
+
+    // `Select`.
+    &--select-input,
+
+    // `TextArea`.
+    &--text-area,
+
+    // `TextInput` and `Slider`.
+    &--text-input {
+      @extend %input__background-color;
+    }
+
+    // `MultiSelect`.
+    &--list-box {
+      &,
+      &__menu {
+        @extend %input__background-color;
+      }
+    }
+  }
+
+  // `IconButton`
+  #{$button--icon__namespace} {
+    &:focus,
+    &:hover {
+      @extend %input__background-color;
+    }
+  }
+}
+
+/// Mixin to generate CSS custom properties from a theme.
+/// @param {Map<String, Color>} $theme The theme to generate the CSS custom properties from.
+/// @access private
+/// @example scss
+///   body {
+///     @include security--generate-css-custom-properties($theme: $-theme);
+///   }
+/// @output css
+///   body {
+///     --cds-interactive-01: #0062ff;
+///     --cds-interactive-02: #6f6f6f;
+///     --cds-interactive-03: #ffffff;
+///   }
+@mixin security--generate-css-custom-properties($theme) {
+  @include carbon--theme(
+    $theme: $theme,
+    $emit-custom-properties: feature-flag-enabled($feature: $theme__name)
+  );
+
+  @if (feature-flag-enabled($feature: $theme__name--security)) {
+    @each $token, $value in $theme {
+      @if (type-of($value: $value) == 'color') {
+        --#{$token}: var(--#{$custom-property-prefix}-#{$token}, #{$value});
+      }
+    }
+
+    @include export-namespace($name: $theme__name--security) {
+      $deprecate: deprecate(
+        $actual: $theme__name--security,
+        $expected: $theme__name,
+        $url:
+          'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/themes.md#feature-flags',
+      );
+
+      $deprecate: deprecate(
+        $actual: "'var(--token)', for example 'var(--interactive-01)'",
+        $expected: "'$token', for example '$interactive-01'",
+        $url:
+          'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/themes.md#variables',
+      );
+    }
+  }
+}
+
+/// Mixin to generate CSS custom properties for the 'cool gray 10' theme.
+/// @param {Map<String, Color>} $theme The theme to generate the CSS custom properties from.
+/// @access private
+@mixin security--theme--cg10($theme) {
+  #{get-component-namespace($component-name: theme--cg10)} & {
+    @include security--generate-css-custom-properties($theme: $theme);
+  }
+}
+
+/// Mixin to apply 'cool gray 10' theme to children of the selector within the 'cool gray 10' theme.
+/// @access private
+/// @example scss
+///   body {
+///     @include security--theme--cg10__cg10;
+///   }
+/// @output css
+///   .security--theme--cg10 body {
+///     --cds-interactive-01: #0062ff;
+///     --cds-interactive-02: #373d42;
+///     --cds-interactive-03: #0062ff;
+///   }
+@mixin security--theme--cg10__cg10 {
+  @include security--theme--cg10($theme: $security--theme--cg10);
+}
+
+/// Mixin to apply 'cool gray 100' theme to children of the selector within the 'cool gray 10' theme.
+/// @access private
+/// @example scss
+///   body {
+///     @include security--theme--cg10__cg100;
+///   }
+/// @output css
+///   .security--theme--cg10 body {
+///     --cds-interactive-01: #0062ff;
+///     --cds-interactive-02: #697077;
+///     --cds-interactive-03: #ffffff;
+///   }
+@mixin security--theme--cg10__cg100 {
+  @include security--theme--cg10(
+    $theme:
+      security--cool-gray(
+        $theme: map-get($map: $security--themes, $key: theme--g100),
+        $grade: 100
+      )
+  );
+}

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tearsheet should override \`labels\` if button label property provided 1`] = `ShallowWrapper {}`;
+
+exports[`Tearsheet should render the Tearsheet 1`] = `ShallowWrapper {}`;

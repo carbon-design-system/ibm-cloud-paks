@@ -1,0 +1,15 @@
+////
+/// Decorator component.
+/// @group decorator
+/// @copyright IBM Security 2019
+////
+
+@import '../Link/index';
+@import '../PanelV2/index';
+
+@import '../Component/mixins';
+@import 'mixins';
+
+@include security--component($name: decorator) {
+  @include decorator;
+}

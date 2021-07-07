@@ -1,0 +1,11 @@
+////
+/// Small tearsheet variables.
+/// @group tearsheet--small
+/// @copyright IBM Security 2020
+////
+
+@import '../mixins';
+
+/// Name.
+/// @type String
+$tearsheet--small__name: #{$tearsheet__name}--small;

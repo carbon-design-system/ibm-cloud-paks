@@ -1,0 +1,30 @@
+////
+/// Layout.
+/// @group layout
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/layout';
+
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/spacing';
+
+@import '../deprecate/index';
+
+// TODO: `2.x` - To be removed.
+
+///
+/// Deprecation warning method for `get-fixed-size`.
+/// @param {Length} $unitQuantity The deprecated unit quantity parameter.
+/// @return {Length} The correct `mini-unit` size.
+///
+@function get-fixed-size($unitQuantity) {
+  $deprecate: deprecate(
+    $actual: 'get-fixed-size($unitQuantity: #{$unitQuantity})',
+    $expected: 'carbon--mini-units($count: #{$unitQuantity})',
+    $url:
+      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/layout.md#functions',
+  );
+
+  @return carbon--mini-units($count: $unitQuantity);
+}

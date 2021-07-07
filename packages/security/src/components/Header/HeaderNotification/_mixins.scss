@@ -1,0 +1,128 @@
+////
+/// Header notification mixins.
+/// @group header__notification
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/font-family';
+@import '@carbon/type/scss/styles';
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../../globals/motion/index';
+
+@import '../mixins';
+
+@mixin header__notification {
+  /// Padding.
+  /// @type Length
+  $header__notification__spacing__padding: $carbon--spacing-05;
+
+  /// Transiton duration.
+  /// @type Length
+  $header__notification__transition-duration: $transition-duration--fast;
+
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+
+  &__content {
+    flex-grow: 1;
+    padding-top: $header__notification__spacing__padding;
+    padding-bottom: $header__notification__spacing__padding;
+    padding-left: $carbon--spacing-03;
+    color: inherit;
+    text-decoration: none;
+
+    &:focus {
+      @include header__popover__item--focus;
+
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /// Tooltip selector.
+    /// @type String
+    $carbon--tooltip: '.#{$prefix}--tooltip';
+
+    > #{$carbon--tooltip}--definition > #{$carbon--tooltip}__trigger {
+      color: currentColor;
+
+      &:focus {
+        outline-color: $inverse-focus-ui;
+      }
+
+      &#{$carbon--tooltip}--bottom,
+      &#{$carbon--tooltip}--top {
+        + .#{$prefix}--assistive-text {
+          background-color: $inverse-01;
+          color: $inverse-02;
+        }
+      }
+
+      &#{$carbon--tooltip}--bottom::before {
+        border-bottom-color: $inverse-01;
+      }
+
+      &#{$carbon--tooltip}--top::before {
+        border-top-color: $inverse-01;
+      }
+    }
+  }
+
+  &__details {
+    @include carbon--type-style($name: caption-01);
+
+    display: block;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  &__time {
+    @include carbon--font-weight($weight: semibold);
+  }
+
+  &__button {
+    @include header__popover__button--icon;
+
+    flex-shrink: 0;
+
+    cursor: inherit;
+    opacity: 0;
+    transform: translate3d(carbon--mini-units($count: 1), 0, 0);
+    transition-duration: $header__notification__transition-duration;
+    transition-property: opacity, transform;
+    transition-timing-function: $header__transition__timing-function;
+
+    &:focus {
+      @include header__popover__item--focus;
+
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $active-tertiary;
+      cursor: pointer;
+    }
+  }
+
+  &__transition {
+    @include transition--opacity;
+
+    &--leave {
+      max-height: $carbon--layout-06;
+      transition-duration: $header__notification__transition-duration;
+      transition-property: max-height, opacity;
+
+      &--active {
+        max-height: 0;
+      }
+    }
+  }
+}

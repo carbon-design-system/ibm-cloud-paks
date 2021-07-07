@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSubcategory Events collapses expanded truncated list of filters 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Events expands truncated list of filters 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering does not render when count is 0 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering does not render with no filters 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering does not truncate short list of filters 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering renders 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering renders open subcategory 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering should not override \`labels\` if unique props are defined 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSubcategory Rendering truncates long list of filters 1`] = `ShallowWrapper {}`;

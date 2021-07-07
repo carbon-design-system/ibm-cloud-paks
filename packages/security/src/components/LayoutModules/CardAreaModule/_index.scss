@@ -1,0 +1,21 @@
+////
+/// Card area module.
+/// @group card-area-module
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import '../../../globals/border/index';
+@import '../../Component/mixins';
+
+@import '../variables';
+
+@include security--component($name: #{$layout-modules__name}--card-area) {
+  padding-bottom: $carbon--layout-01;
+
+  &__component {
+    margin-bottom: $carbon--layout-01;
+  }
+}

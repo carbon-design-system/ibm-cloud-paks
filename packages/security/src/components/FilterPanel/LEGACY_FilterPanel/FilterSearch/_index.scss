@@ -1,0 +1,15 @@
+////
+/// Legacy filter search styles.
+/// @group filter-panel
+/// @copyright IBM Security 2019 - 2020
+////
+
+@import '../../../Search/index';
+
+@import '../../../Component/mixins';
+
+@import 'mixins';
+
+@include namespace($selector: filter-search) {
+  @include LEGACY-filter-search;
+}

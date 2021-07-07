@@ -1,0 +1,131 @@
+////
+/// List item module.
+/// @group list-item-module
+/// @copyright IBM Security 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../../../globals/border/index';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../../Component/mixins';
+@import '../variables';
+
+@import '../../../globals/motion/index';
+
+@include security--component($name: #{$layout-modules__name}--list-item) {
+  /// Spacing.
+  /// @type Length
+  $list-item-module__spacing: $carbon--spacing-02;
+  $list-item-module__border: $border__sizing__width solid $ui-03;
+
+  display: flex;
+  padding: $carbon--spacing-05;
+  border: none;
+  border-top: $list-item-module__border;
+  background-color: $ui-01;
+
+  &:last-of-type {
+    border-bottom: $list-item-module__border;
+  }
+
+  &--a,
+  &--button {
+    @include transition($transition-property: background-color);
+
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &--button {
+    width: 100%;
+    font-family: inherit;
+    text-align: left;
+  }
+
+  &--a:focus,
+  &--a:hover,
+  &--button:focus,
+  &--button:hover {
+    background-color: $hover-ui;
+  }
+
+  &--a:focus,
+  &--button:focus {
+    @include focus-outline($type: outline);
+  }
+
+  &__farside-column {
+    margin-left: auto;
+  }
+
+  &__title,
+  &__description {
+    margin-top: 0;
+  }
+
+  &__icon {
+    margin-right: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  &__avatar {
+    margin-top: $list-item-module__spacing;
+    margin-right: $carbon--spacing-04;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__profile-image {
+    width: 24px;
+    height: 24px;
+    margin-right: $carbon--spacing-04;
+  }
+
+  &__title {
+    @include carbon--type-style($name: body-short-01);
+  }
+
+  &__description,
+  &__label {
+    color: $text-02;
+  }
+
+  &__description {
+    @include carbon--type-style($name: body-short-01);
+  }
+
+  &__label {
+    @include carbon--type-style($name: label-01);
+
+    display: block;
+    padding-top: $list-item-module__spacing;
+  }
+
+  &__title,
+  &__description,
+  &__label {
+    margin-bottom: $list-item-module__spacing;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .bx--tag {
+    margin-top: -$carbon--spacing-02;
+    margin-bottom: -$carbon--spacing-02;
+  }
+
+  &__component {
+    padding-top: $carbon--spacing-05;
+    margin-bottom: 0;
+  }
+}

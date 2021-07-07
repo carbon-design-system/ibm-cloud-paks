@@ -1,0 +1,24 @@
+////
+/// Header list item mixins.
+/// @group header__list__item
+/// @copyright IBM Security 2019
+////
+
+@import '@carbon/layout/scss/spacing';
+
+@mixin header__list__item {
+  height: inherit;
+
+  &--active {
+    margin-right: $carbon--spacing-03;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  > .#{$prefix}--btn {
+    height: inherit;
+    min-height: inherit;
+  }
+}

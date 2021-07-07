@@ -1,0 +1,14 @@
+////
+/// Filter panel accordion mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020
+////
+
+@import '@carbon/layout/scss/spacing';
+
+@mixin filter-panel-accordion {
+  &__title {
+    margin-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-05;
+  }
+}

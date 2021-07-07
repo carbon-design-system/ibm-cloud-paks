@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable Interactions updates overflow menus position on scroll 1`] = `
+Object {
+  "style": Object {
+    "transform": "translateX(-70px)",
+  },
+}
+`;
+
+exports[`DataTable Rendering renders 1`] = `ReactWrapper {}`;
+
+exports[`DataTable Rendering renders a custom table 1`] = `ReactWrapper {}`;
+
+exports[`DataTable Rendering renders a selectable table 1`] = `ReactWrapper {}`;
+
+exports[`DataTable Rendering renders a sortable table 1`] = `ReactWrapper {}`;

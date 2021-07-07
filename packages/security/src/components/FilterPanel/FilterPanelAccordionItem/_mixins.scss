@@ -1,0 +1,89 @@
+////
+/// Filter panel accordion item mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../../globals/motion/index';
+
+@mixin filter-panel-accordion-item__heading {
+  /// Heading padding.
+  /// @type Length
+  $filter-panel-accordion-item__heading__spacing__padding: $carbon--spacing-02;
+
+  min-height: carbon--mini-units($count: 4);
+
+  padding-top: $filter-panel-accordion-item__heading__spacing__padding;
+  padding-bottom: $filter-panel-accordion-item__heading__spacing__padding;
+  color: $text-02;
+}
+
+@mixin filter-panel-accordion-item {
+  /// Scroller padding.
+  /// @type Length
+  $filter-panel-accordion-item__spacing__padding: $carbon--spacing-05;
+
+  border-top-width: 0;
+
+  &:last-child {
+    border-bottom-width: 0;
+  }
+
+  &__count {
+    @include carbon--type-style($name: caption-01);
+  }
+
+  &__list {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  /// Carbon accordion selector.
+  /// @type String
+  $carbon--accordion: '.#{$prefix}--accordion';
+
+  > #{$carbon--accordion} {
+    &__heading {
+      @include filter-panel-accordion-item__heading;
+
+      border: 2px solid transparent;
+
+      // Increase outline spacing horizontally so that it does not overlap with the count on the
+      // accordion heading label.
+      &::before {
+        left: -$carbon--spacing-01;
+        width: calc(100% + #{$carbon--spacing-03});
+      }
+
+      &:focus::before {
+        // Override Carbon `Accordion` defaults:
+        @include focus-outline($type: outline);
+
+        border: none;
+      }
+    }
+
+    &__content {
+      padding: 0 0 0 $filter-panel-accordion-item__spacing__padding;
+    }
+  }
+
+  // Reduce the width of the label so long labels with counts overflow out of the panel.
+  // The 2.8em corresponds to the space that the arrow takes.
+  #{$carbon--accordion}__title {
+    width: calc(100% - 2.8em);
+  }
+
+  &#{$carbon--accordion}__item--active > #{$carbon--accordion}__heading {
+    color: $text-01;
+  }
+}

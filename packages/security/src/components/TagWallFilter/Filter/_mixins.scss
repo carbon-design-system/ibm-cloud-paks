@@ -1,0 +1,123 @@
+////
+/// Filter mixins.
+/// @filter
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/globals/scss/helper-classes';
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../../../globals/namespace/index';
+
+@import '../../Tearsheet/mixins';
+
+/// Name.
+/// @type String
+$filter__name: filter;
+
+/// Namespace.
+/// @type String
+$filter__namespace: get-component-namespace(
+  $component-name: $filter__name,
+);
+
+/// Dimensions.
+/// @type Length
+$filter__sizing__dimensions: carbon--mini-units(
+  $count: 5,
+);
+
+@mixin filter {
+  $root: &;
+
+  .#{$prefix}--list-box {
+    &__field {
+      position: fixed;
+      height: $filter__sizing__dimensions;
+      padding-right: 0;
+      padding-left: 0;
+      background-color: inherit;
+      transform: translate3d(0, -100%, 0);
+    }
+
+    &__menu-item__option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__search {
+    position: absolute;
+    top: 0;
+    right: $carbon--spacing-05;
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    &__icon {
+      fill: $icon-02;
+    }
+  }
+
+  &__add {
+    display: flex;
+
+    &__icon {
+      fill: currentColor;
+      visibility: hidden;
+    }
+  }
+
+  &__list-container {
+    background-color: $tearsheet__color__background;
+
+    &:empty {
+      min-height: $filter__sizing__dimensions;
+      cursor: default;
+    }
+  }
+
+  &__list-item {
+    &:focus,
+    &:hover {
+      #{$root}__add__icon {
+        visibility: visible;
+      }
+    }
+
+    &:focus {
+      @include focus-outline($type: outline);
+    }
+
+    &:hover {
+      position: relative;
+      background: $ui-02;
+
+      &::after {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: $ui-02;
+        content: '';
+        transform: translateY(1px);
+      }
+    }
+
+    &:first-of-type > .#{$prefix}--list-box__menu-item__option {
+      border-color: transparent;
+    }
+  }
+
+  &__list-item__entry {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

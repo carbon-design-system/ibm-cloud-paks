@@ -1,0 +1,108 @@
+import { parameters } from '../../../../.storybook/preview';
+
+import anatomy from './images/anatomy.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+import layoutConsiderations from './images/layout-considerations.png';
+
+# ButtonClusterModule
+
+The button cluster module group secondary actions that can be taken on a whole
+page or component. Icons are used to help describe, at a glance, the action that
+can be taken.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Grid placement](#grid-placement)  
+[↳ Layout considerations](#layout-considerations)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The button cluster module can be built using a combination of the
+`ButtonClusterModule` and
+[`Button`](https://react.carbondesignsystem.com/?path=/docs/button) components.
+The `ButtonClusterModule` accepts a list of `Button` components as `children`.
+
+<Canvas>
+  <Story
+    id="layout-modules-buttonclustermodule--default"
+    parameters={parameters}
+  />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `ButtonClusterModule` will be forwarded along to
+the underlying button cluster module container.
+
+### Anatomy
+
+1. **Ghost buttons:** Ghost buttons stack directly below each other.
+2. **Divider lines:** Divider lines create structure and provide separation
+   between the ghost buttons.
+3. **Bottom spacer:** The 16-pixel spacer `$spacing-05` below the last button
+   provides the starting point for the layout module positioned directly
+   underneath it.
+
+<img alt="`ButtonClusterModule` anatomy" src={anatomy} />
+
+### Grid placement
+
+Button cluster modules span across 4 columns. Following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation, the button text aligns to the grid and the text below. The
+divider lines will overhang to the left by 16px.
+
+<Row>
+  <Column>
+    <img alt="`ButtonClusterModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`ButtonClusterModule` don't" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<Column lg={4}>
+  <ButtonClusterModule />
+</Column>
+```
+
+### Layout considerations
+
+Occassionally
+[spacing tokens](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+will need to be included to offset the button cluster module to ensure it
+top-aligns with the adjacent layout container. If top spacing tokens are
+necessary, reference the layout module that sits directly above it as the
+starting point for placement.
+
+<img
+  alt="`ButtonClusterModule` layout considerations"
+  src={layoutConsiderations}
+/>
+
+### Examples
+
+<Row>
+  <Overview />
+</Row>
+
+### References
+
+- [Button](https://react.carbondesignsystem.com/?path=/docs/button)
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+- [Spacing scale](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+
+<Troubleshooting />

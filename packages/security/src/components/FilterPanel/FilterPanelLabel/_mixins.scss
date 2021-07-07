@@ -1,0 +1,26 @@
+////
+/// Filter panel label mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@mixin filter-panel-label {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  &__text {
+    overflow: hidden;
+    flex: 1 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    margin-left: $carbon--spacing-04;
+    color: $text-02;
+  }
+}

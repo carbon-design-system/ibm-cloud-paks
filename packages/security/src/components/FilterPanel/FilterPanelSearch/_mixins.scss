@@ -1,0 +1,29 @@
+////
+/// Filter panel search mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/globals/scss/layout';
+
+@mixin filter-panel-search {
+  position: relative;
+  margin-bottom: $carbon--spacing-05;
+
+  &__results {
+    position: absolute;
+    z-index: z($layer: dropdown);
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: carbon--mini-units($count: 38);
+    box-sizing: border-box;
+    padding: $carbon--spacing-03;
+    background-color: $ui-01;
+    overflow-y: auto;
+  }
+}

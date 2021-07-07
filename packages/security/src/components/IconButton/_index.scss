@@ -1,0 +1,13 @@
+////
+/// Icon button component.
+/// @group button--icon
+/// @copyright IBM Security 2019
+////
+@import '../Component/mixins';
+
+@import 'variables';
+@import 'mixins';
+
+@include security--component($name: $button--icon__name) {
+  @include button--icon;
+}

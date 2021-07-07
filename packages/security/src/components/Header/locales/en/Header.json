@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "company": "IBM",
+    "domain": "Security",
+    "product": "Application"
+  },
+  "notifications": {
+    "button": "Toggle notifications",
+    "title": "Notifications",
+    "today": "Today",
+    "clear_all": "Clear all notifications",
+    "clear": "Clear",
+    "via": "via",
+    "success": "You're all caught up!",
+    "link": "View all"
+  },
+  "profile": {
+    "button": "Toggle profile",
+    "registration": "Create an account",
+    "sign_in": "Sign in",
+    "link": "Profile & account",
+    "sign_out": "Sign out",
+    "edit_profile": "Edit profile",
+    "account": "Account"
+  }
+}

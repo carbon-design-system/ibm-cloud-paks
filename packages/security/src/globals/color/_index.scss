@@ -1,0 +1,38 @@
+////
+/// Colors.
+/// @group colors
+/// @copyright IBM Security 2019
+////
+
+@import '@carbon/colors/scss/colors';
+@import '@carbon/themes/scss/tokens';
+
+/// TODO: `2.x` - Deprecate in favor of `$hover-ui`.
+/// @type Color
+/// @deprecated
+$security-color__gray-90--hover: $hover-ui;
+
+/// 'Cool gray 10' hover.
+/// @type Color
+/// @access private
+$security--cool-gray-10--hover: #e0e4ea;
+
+/// 'Cool gray 20' hover.
+/// @type Color
+/// @access private
+$security--cool-gray-20--hover: #c4c9d1;
+
+/// 'Cool gray 60' hover.
+/// @type Color
+/// @access private
+$security--cool-gray-60--hover: #5a6066;
+
+/// 'Cool gray 80' hover.
+/// @type Color
+/// @access private
+$security--cool-gray-80--hover: #464c51;
+
+/// 'Cool gray 90' hover.
+/// @type Color
+/// @access private
+$security--cool-gray-90--hover: #2f353a;

@@ -1,0 +1,101 @@
+////
+/// Scroll gradient component.
+/// @group scroll-gradient
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
+
+@import '../../globals/motion/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: scroll-gradient) {
+  /// Thickness of gradient.
+  /// @type Length
+  $scroll-gradient__gradient__sizing: $carbon--layout-04;
+
+  $block: &;
+
+  position: relative;
+  display: flex;
+  width: inherit;
+  height: inherit;
+  align-items: stretch;
+  justify-content: stretch;
+
+  &__content {
+    overflow: auto;
+    width: 100%;
+    height: inherit;
+  }
+
+  &__before,
+  &__after {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition-duration: $transition-duration;
+    transition-property: opacity;
+    transition-timing-function: carbon--motion($name: standard);
+  }
+
+  &--x > {
+    #{$block}__before,
+    #{$block}__after {
+      top: 0;
+      width: $scroll-gradient__gradient__sizing;
+      height: 100%;
+    }
+
+    #{$block}__before {
+      left: 0;
+    }
+
+    #{$block}__after {
+      right: 0;
+    }
+  }
+
+  &--y > {
+    #{$block}__before,
+    #{$block}__after {
+      left: 0;
+      width: 100%;
+      height: $scroll-gradient__gradient__sizing;
+    }
+
+    #{$block}__before {
+      top: 0;
+    }
+
+    #{$block}__after {
+      bottom: 0;
+    }
+  }
+
+  &--initial,
+  &--started {
+    > #{$block}__after {
+      opacity: 1;
+    }
+  }
+
+  &--end,
+  &--started {
+    > #{$block}__before {
+      opacity: 1;
+    }
+  }
+
+  &--initial > #{$block}__before {
+    transition-duration: $transition-duration--fast;
+  }
+
+  &--end > #{$block}__after {
+    transition-duration: $transition-duration--fast;
+  }
+}

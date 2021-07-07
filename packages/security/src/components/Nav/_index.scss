@@ -1,0 +1,12 @@
+////
+/// Navigation component.
+/// @group nav
+/// @copyright IBM Security 2019
+////
+
+@import '../Component/mixins';
+@import 'mixins';
+
+@include security--component($name: nav) {
+  @include nav;
+}

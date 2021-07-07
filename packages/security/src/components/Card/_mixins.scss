@@ -1,0 +1,98 @@
+////
+/// Card mixins.
+/// @group card
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../../globals/motion/index';
+@import '../../globals/theme/mixins';
+
+@import '../../platform/body/mixins';
+
+/// Name.
+/// @type String
+$card__name: card;
+
+@mixin card {
+  /// Header image dimensions.
+  /// @type Length
+  $card__image__sizing__dimensions: carbon--mini-units(
+    $count: 4,
+  );
+
+  @include input__background-color;
+
+  display: flex;
+  width: auto;
+  min-width: carbon--mini-units($count: 24);
+  min-height: $carbon--layout-06;
+  flex-direction: column;
+  padding: $carbon--spacing-05;
+  background-color: $ui-01;
+  color: $body__color__text;
+  word-break: break-word;
+
+  &__link {
+    @include transition($transition-property: background-color);
+
+    display: block;
+    color: inherit;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:focus {
+      @include focus-outline($type: outline);
+    }
+  }
+
+  &__header {
+    &__image {
+      width: $card__image__sizing__dimensions;
+      height: $card__image__sizing__dimensions;
+      margin-bottom: $carbon--spacing-02;
+    }
+
+    &__title {
+      @include carbon--type-style($name: heading-01);
+
+      margin-top: 0;
+      margin-bottom: $carbon--spacing-05;
+    }
+
+    &__tag {
+      $card__tag__spacing: $carbon--spacing-04;
+
+      @include carbon--type-style($name: caption-01);
+
+      margin-top: $card__tag__spacing;
+      margin-bottom: $card__tag__spacing;
+    }
+  }
+
+  &__body {
+    display: inline-block;
+
+    &__text {
+      @include carbon--type-style($name: caption-01);
+
+      margin-bottom: $carbon--spacing-05;
+    }
+  }
+
+  &__footer {
+    @include carbon--type-style($name: label-01);
+
+    margin-top: auto;
+  }
+}

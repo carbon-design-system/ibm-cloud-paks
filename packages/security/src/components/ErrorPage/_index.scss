@@ -1,0 +1,14 @@
+////
+/// Error section component.
+/// @group error-page
+/// @copyright IBM Security 2019
+////
+
+@import '../Link/index';
+
+@import '../Component/mixins';
+@import 'mixins';
+
+@include security--component($name: error-page) {
+  @include error-page;
+}

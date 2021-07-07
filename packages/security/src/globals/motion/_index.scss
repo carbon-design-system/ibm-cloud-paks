@@ -1,0 +1,66 @@
+////
+/// Motion.
+/// @group motion
+/// @copyright IBM Security 2019 - 2021
+////
+
+/// Timing function.
+/// @type Length
+$timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+
+/// Ease-out timing function.
+/// @type Length
+$timing-function--ease-out: cubic-bezier(0, 0, 0.25, 1);
+
+/// Transition duration.
+/// @type Length
+$transition-duration: 0.2s;
+
+/// Fast transition duration.
+/// @type Length
+$transition-duration--fast: 0.1s;
+
+/// Transition baseline.
+/// @example scss
+///   body {
+///     @include transition($transition-property: background-color);
+///   }
+@mixin transition(
+  $transition-property,
+  $timing-function: $timing-function,
+  $transition-duration: $transition-duration
+) {
+  transition-duration: $transition-duration;
+  transition-property: $transition-property;
+  transition-timing-function: $timing-function;
+}
+
+/// Opacity transition baseline.
+/// @example scss
+///   body {
+///     @include transition--opacity;
+///   }
+@mixin transition--opacity {
+  &--enter,
+  &--leave {
+    &--active {
+      opacity: 1;
+      transition-timing-function: $timing-function;
+    }
+  }
+  &--enter {
+    opacity: 0;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &--leave {
+    opacity: 1;
+
+    &--active {
+      opacity: 0;
+    }
+  }
+}

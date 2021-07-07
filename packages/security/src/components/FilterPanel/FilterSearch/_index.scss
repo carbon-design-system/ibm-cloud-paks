@@ -1,0 +1,68 @@
+////
+/// Filter search styles.
+/// @group filter-panel
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/layout';
+
+@import '../../Search/index';
+
+@import '../../Component/mixins';
+
+@include security--component($name: filter-search) {
+  /// Padding.
+  /// @type Length
+  $filter-search__spacing__padding: $carbon--spacing-03;
+
+  position: relative;
+
+  &__input {
+    margin-bottom: $filter-search__spacing__padding;
+  }
+
+  &__list {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__subcategory {
+    padding-top: $filter-search__spacing__padding;
+    padding-bottom: $filter-search__spacing__padding;
+    border-top: carbon--mini-units($count: 0.125) solid $ui-04;
+
+    &__title {
+      @include carbon--type-style($name: caption-01);
+
+      margin-top: 0;
+      margin-bottom: $filter-search__spacing__padding;
+    }
+  }
+
+  &__results {
+    position: absolute;
+    z-index: z($layer: dropdown);
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    box-sizing: border-box;
+    padding: $filter-search__spacing__padding;
+    background-color: $ui-01;
+
+    &--none {
+      @include carbon--type-style($name: caption-01);
+    }
+
+    &--visible {
+      max-height: carbon--mini-units($count: 38);
+      overflow-y: auto;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSelector Rendering renders checked filter 1`] = `ShallowWrapper {}`;
+
+exports[`FilterSelector Rendering renders unchecked filter 1`] = `ShallowWrapper {}`;

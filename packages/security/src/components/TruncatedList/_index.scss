@@ -1,0 +1,51 @@
+////
+/// Truncated list styles.
+/// @group list-truncator
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/themes/scss/tokens';
+
+@import '../../globals/motion/index';
+
+@import '../Button/index';
+@import '../ScrollGradient/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: truncated-list) {
+  margin: 0;
+
+  &__scroller-container {
+    height: auto;
+  }
+
+  &__scroller {
+    @include transition($transition-property: height);
+  }
+
+  // Transform button to appear more like a link so it aligns better with the list text
+  &__expand-button {
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    padding: 0;
+    border: none;
+
+    // Add one pixel so the scroll gradient does not overlap with the toggle button's focus box
+    // shadow
+    margin-top: 1px;
+    background: transparent;
+    color: $link-01;
+
+    &:hover {
+      background: transparent;
+      color: $link-01;
+    }
+
+    &:active {
+      background: transparent;
+      color: $text-01;
+    }
+  }
+}

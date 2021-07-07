@@ -1,0 +1,35 @@
+////
+/// Accordion component.
+/// @group accordion
+/// @copyright IBM Security 2019 - 2020
+////
+
+@import 'carbon-components/scss/components/accordion/accordion';
+
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/namespace/index';
+
+@import '../SkeletonText/index';
+
+@include export-namespace($name: accordion) {
+  .#{$prefix}--accordion {
+    &.#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+      align-items: center;
+    }
+
+    &__item--active &__title {
+      font-weight: 600;
+    }
+
+    // Prevents gaps between closed accordion items.
+    &__content > * {
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

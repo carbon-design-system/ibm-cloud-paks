@@ -1,0 +1,46 @@
+////
+/// Wizard component.
+/// @group wizard
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+
+@import '../../globals/namespace/index';
+
+@import '../Nav/index';
+@import '../ProgressIndicator/index';
+@import '../Tearsheet/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: wizard) {
+  &__navItem {
+    margin-left: -$carbon--spacing-06;
+  }
+
+  .#{$prefix}--progress--vertical {
+    .#{$prefix}--progress-step,
+    .#{$prefix}--progress-step-button {
+      flex-wrap: nowrap;
+      margin-bottom: $carbon--spacing-03;
+    }
+
+    .#{$prefix}--progress-step svg,
+    .#{$prefix}--progress-step-button svg {
+      margin-left: 0;
+    }
+
+    .#{$prefix}--progress-label {
+      display: -webkit-box;
+      overflow: hidden;
+      max-width: 80ch;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+
+    .#{$prefix}--progress-line {
+      display: none;
+    }
+  }
+}

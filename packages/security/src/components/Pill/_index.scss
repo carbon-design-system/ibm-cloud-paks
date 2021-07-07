@@ -1,0 +1,26 @@
+////
+/// Pill component.
+/// @group pill
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/colors/scss/colors';
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+
+@import '../../globals/namespace/index';
+
+@import '../DataDecorator/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: pill) {
+  padding: 0 $carbon--spacing-03;
+  border-radius: carbon--mini-units($count: 12.5);
+
+  &--inline {
+    display: inline-flex;
+    padding: 0 $carbon--spacing-02;
+    border-radius: carbon--mini-units($count: 6.25);
+  }
+}

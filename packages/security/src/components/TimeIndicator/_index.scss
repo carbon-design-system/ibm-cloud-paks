@@ -1,0 +1,24 @@
+////
+/// Time indicator.
+/// @group time-indicator
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../Component/mixins';
+
+@include security--component($name: time-indicator) {
+  @include carbon--type-style($name: label-01);
+
+  display: flex;
+  align-items: center;
+  color: $text-02;
+
+  &__icon {
+    margin-right: $carbon--spacing-03;
+    fill: $icon-01;
+  }
+}

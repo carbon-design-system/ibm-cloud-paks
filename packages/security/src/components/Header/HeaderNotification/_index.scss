@@ -1,0 +1,16 @@
+////
+/// Header notification component.
+/// @group header__notification
+/// @copyright IBM Security 2019
+////
+
+@import '../../StringFormatter/index';
+@import '../../Component/mixins';
+
+@import '../mixins';
+
+@import 'mixins';
+
+@include security--component($name: #{$header__name}__notification) {
+  @include header__notification;
+}

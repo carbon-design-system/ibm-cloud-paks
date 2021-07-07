@@ -1,0 +1,17 @@
+////
+/// Delimited list component.
+/// @group delimited-list
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '../Component/mixins';
+
+@include security--component($name: delimited-list) {
+  display: flex;
+
+  &__value--truncated {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

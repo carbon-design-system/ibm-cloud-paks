@@ -1,0 +1,41 @@
+////
+/// Title bar module.
+/// @group title-bar-module
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/type/scss/styles';
+
+@import '../../Component/mixins';
+@import '../variables';
+
+@include security--component($name: #{$layout-modules__name}--title-bar) {
+  /// Spacing.
+  /// @type Length
+  $title-bar__spacing: $carbon--layout-01;
+
+  display: flex;
+
+  &__title {
+    @include carbon--type-style($name: productive-heading-03);
+
+    margin-top: $title-bar__spacing;
+    margin-bottom: $title-bar__spacing;
+  }
+
+  &__items {
+    margin-top: $carbon--spacing-02;
+    margin-left: auto;
+  }
+
+  &--subsection > & {
+    &__title {
+      @include carbon--type-style($name: productive-heading-02);
+    }
+
+    &__items {
+      margin-top: 0;
+    }
+  }
+}

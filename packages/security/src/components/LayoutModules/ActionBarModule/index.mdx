@@ -1,0 +1,103 @@
+import { parameters } from '../../../../.storybook/preview';
+
+import anatomy from './images/anatomy.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+# ActionBarModule
+
+Action bars allow users to take multiple actions on the subsequent section.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The action bar module can be built using a combination of the `ActionBarModule`
+and `ActionBarModuleItems` components. `ActionBarModuleItems` is responsible for
+positioning the actions, and everything passed in as a child of
+`ActionBarModuleItems` will be rendered.
+
+<Canvas>
+  <Story id="layout-modules-actionbarmodule--default" parameters={parameters} />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `ActionBarModule` and `ActionBarModuleItems` will
+be forwarded along to their underlying containers.
+
+### Anatomy
+
+1. **Ghost button:** The predominant action for the bar should be placed here as
+   a ghost button, alternatively a title can be supplemented, see
+   [variants](#variants). Both the ghost button text and the title variant text
+   should left-align with the text above and below.
+2. **Icon button bar:** The icon buttons are contained inside the
+   <LinkTo kind="patterns-iconbuttonbar" story="default">icon button
+   bar</LinkTo> and are 16px in height.
+3. **Bottom spacer:** The 8px spacer `$spacing-03`, included inside the action
+   bar, means that the module can be placed flush to the top edge of the
+   components below.
+
+<img alt="`ActionBarModule` anatomy" src={anatomy} />
+
+### Variants
+
+If necessary, supplementary details or an icon button can be passed into the
+action bar instead of the ghost button. Both are the same height as the ghost
+button and top aligned with the action button bar.
+
+<Canvas>
+  <Story id="layout-modules-actionbarmodule--variant" parameters={parameters} />
+</Canvas>
+
+### Grid placement
+
+Action bar modules can span between 4 and 16 columns, following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation.
+
+<Row>
+  <Column>
+    <img alt="`ActionBarModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`ActionBarModule` don't" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<Column lg={4}>
+  <ActionBarModule />
+</Column>
+```
+
+### Examples
+
+<Row>
+  <Detail />
+  <Overview />
+</Row>
+
+### References
+
+- [Button](https://react.carbondesignsystem.com/?path=/docs/button)
+- <LinkTo kind="patterns-iconbuttonbar" story="default">
+    IconButtonBar
+  </LinkTo>
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+
+<Troubleshooting />

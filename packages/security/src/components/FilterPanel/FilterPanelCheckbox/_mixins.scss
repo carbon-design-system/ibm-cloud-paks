@@ -1,0 +1,50 @@
+////
+/// Filter panel checkbox mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/type/scss/styles';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@mixin filter-panel-checkbox {
+  &__wrapper {
+    @include carbon--type-style($name: body-short-01);
+
+    display: flex;
+    max-width: 100%;
+
+    // Artificially increase the specificity of this style to override Carbon's style
+    &.#{$prefix}--checkbox-wrapper {
+      &,
+      &:first-of-type,
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
+
+  &__count {
+    @include carbon--type-style($name: caption-01);
+
+    // Add visual parentheses.
+    &::before {
+      content: '(';
+    }
+
+    &::after {
+      content: ')';
+    }
+  }
+
+  // Checkbox component styles override
+  &,
+  > span {
+    width: 100%;
+  }
+
+  > span {
+    display: flex;
+    align-items: center;
+  }
+}

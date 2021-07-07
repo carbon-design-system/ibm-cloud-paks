@@ -1,0 +1,12 @@
+////
+/// Portal component.
+/// @group portal
+/// @copyright IBM Security 2018
+////
+
+@import '../Component/mixins';
+@import 'mixins';
+
+@include security--component($name: portal) {
+  @include portal;
+}

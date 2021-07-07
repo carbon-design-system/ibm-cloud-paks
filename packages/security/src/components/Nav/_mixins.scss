@@ -1,0 +1,280 @@
+////
+/// Navigation mixins.
+/// @group nav
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/motion';
+
+@import '../../globals/motion/index';
+@import '../../globals/rtl/index';
+
+/// Spacing.
+/// @type Length
+$nav__spacing: $carbon--spacing-04;
+
+/// Icon spacing.
+/// @type Length
+$nav__icon__spacing: $carbon--spacing-05 + $nav__spacing;
+
+@mixin nav {
+  $nav__heading: '#{&}__heading';
+  $nav__list: '#{&}__list';
+  $nav__item: '#{$nav__list}__item';
+
+  /// Icon position.
+  /// @type Length
+  $nav__icon__position: translate3d(-50%, 0, 0);
+
+  position: relative;
+
+  &:not(:first-of-type) {
+    padding-top: $carbon--spacing-05;
+  }
+
+  &:not(:last-of-type) {
+    padding-bottom: $carbon--spacing-05;
+  }
+
+  &:last-of-type {
+    padding-bottom: $carbon--spacing-07;
+  }
+
+  & + & > #{$nav__heading} {
+    padding-top: $carbon--spacing-02;
+  }
+
+  &::before {
+    position: absolute;
+    right: $carbon--spacing-07;
+    bottom: 0;
+    left: $carbon--spacing-07;
+    display: inline-block;
+    width: auto;
+    border-bottom: carbon--mini-units($count: 0.125) solid $ui-02;
+    content: '';
+  }
+
+  &:last-of-type::before {
+    border-width: 0;
+  }
+
+  &__wrapper {
+    padding-left: unset;
+    margin-top: unset;
+    margin-bottom: unset;
+    list-style: none;
+
+    @include rtl {
+      padding-right: unset;
+    }
+  }
+
+  &__heading {
+    @include carbon--type-style($name: caption-01);
+
+    padding: $carbon--spacing-04 $carbon--spacing-07;
+    margin-top: unset;
+    margin-bottom: unset;
+    color: $text-02;
+    font-weight: 400;
+  }
+
+  // Navigation lists.
+  &__list {
+    $list: &;
+
+    @include carbon--type-style($name: body-short-01);
+
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    &,
+    &__item {
+      margin-bottom: $carbon--spacing-01;
+    }
+
+    &:focus {
+      background-color: $ui-02;
+      outline-width: 0;
+
+      > #{$list}__item__link {
+        @include focus-outline('outline');
+      }
+    }
+
+    &__icon {
+      @include transition($transition-property: transform);
+
+      margin-left: auto;
+      transform: $nav__icon__position rotate(270deg);
+      @include rtl {
+        right: $carbon--spacing-02;
+        transform: $nav__icon__position rotate(90deg);
+      }
+    }
+
+    // Navigation items.
+    &__item {
+      @include carbon--type-style($name: body-short-01);
+
+      position: relative;
+
+      // Content including text and sometimes a product icon.
+      &__content {
+        display: flex;
+        margin-left: $nav__icon__spacing;
+      }
+
+      &::before {
+        @include transition($transition-property: transform);
+
+        position: absolute;
+        z-index: z($layer: floating);
+        top: 0;
+        left: 0;
+
+        display: inline-block;
+        width: carbon--mini-units($count: 0.5);
+        height: 100%;
+        background-color: transparent;
+        content: '';
+        transform: translate3d((-100%, 0, 0));
+      }
+
+      @include rtl {
+        &::before {
+          right: 0;
+          transform: translate3d(
+            reverse-transform(
+              $transform: (
+                -100%,
+                0,
+                0,
+              )
+            )
+          );
+        }
+      }
+
+      &--disabled {
+        pointer-events: none;
+
+        > #{$nav__item}__link {
+          color: $disabled-03;
+        }
+      }
+
+      &--active {
+        font-weight: 600;
+
+        @include rtl {
+          &::before {
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
+        &::before {
+          background-color: $interactive-01;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      // Navigation item link.
+      &__link {
+        @include transition($transition-property: background-color);
+
+        position: relative;
+        display: flex;
+        padding: $carbon--spacing-02;
+        color: $text-01;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          background-color: $ui-02;
+        }
+
+        &:focus {
+          @include focus-outline('outline');
+        }
+      }
+
+      &__link--external {
+        /// External link icon selector.
+        /// @type String
+        $nav__item__link--external__icon: '#{&}__icon';
+
+        #{$nav__item__link--external__icon} {
+          flex-shrink: 0;
+          align-self: center;
+          margin-left: $carbon--spacing-02;
+          fill: $text-01;
+          opacity: 0;
+        }
+
+        &:hover,
+        &:focus {
+          > #{$nav__item__link--external__icon} {
+            opacity: 1;
+          }
+        }
+      }
+
+      // Expanded navigation list.
+      &--expanded {
+        margin-bottom: $carbon--spacing-03;
+
+        > #{$nav__list}--nested {
+          max-height: carbon--mini-units($count: 40);
+          margin-top: carbon--mini-units($count: 1.25);
+          opacity: 1;
+          transition-timing-function: $carbon--ease-in;
+        }
+
+        > #{$nav__item}__link > #{$nav__list}__icon {
+          transform: $nav__icon__position rotate(360deg);
+
+          @include rtl {
+            transform: $nav__icon__position rotate(0);
+          }
+        }
+      }
+    }
+
+    &--nested {
+      @include transition(
+        $transition-property: (
+          max-height,
+          opacity,
+        )
+      );
+
+      overflow: hidden;
+
+      max-height: 0;
+      padding-left: 0;
+      margin-bottom: 0;
+      margin-left: $nav__icon__spacing;
+      opacity: 0;
+
+      @include rtl {
+        padding-right: 0;
+        padding-left: unset;
+      }
+
+      > #{$nav__item}:last-of-type {
+        margin-bottom: $carbon--spacing-03;
+      }
+    }
+  }
+}

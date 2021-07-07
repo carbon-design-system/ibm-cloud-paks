@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScrollGradient Rendering renders gradient in x-direction 1`] = `ReactWrapper {}`;
+
+exports[`ScrollGradient Rendering renders gradient in y-direction by default 1`] = `ReactWrapper {}`;

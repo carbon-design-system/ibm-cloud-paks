@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton does not render the tooltip 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'bottom' tooltip 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'left' tooltip 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'lg' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'md' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'right' tooltip 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'sm' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'top' tooltip 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the 'xl' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the disabled variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButton renders the path variation 1`] = `ShallowWrapper {}`;

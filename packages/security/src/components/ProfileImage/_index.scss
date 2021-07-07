@@ -1,0 +1,13 @@
+////
+/// Profile image component.
+/// @group profile-image
+/// @copyright IBM Security 2019
+////
+
+@import '../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: profile-image) {
+  @include profile-image;
+}

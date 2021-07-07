@@ -1,0 +1,13 @@
+////
+/// Filter panel label styles.
+/// @group filter-panel
+/// @copyright IBM Security 2020
+////
+
+@import '../../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: filter-panel-label) {
+  @include filter-panel-label;
+}

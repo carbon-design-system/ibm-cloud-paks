@@ -1,0 +1,483 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TagWallFilter tests FilterTagFragment should call the on change callback with the latest item state on change 1`] = `
+Object {
+  "availableItems": Array [
+    Object {
+      "id": "x",
+      "label": "X",
+    },
+  ],
+  "dispatchItemChange": [Function],
+  "id": "test-id",
+  "itemState": Object {
+    "available": Object {
+      "allItems": Array [
+        Object {
+          "id": "y",
+          "label": "Y",
+        },
+        Object {
+          "id": "x",
+          "label": "X",
+        },
+      ],
+      "items": Array [],
+    },
+    "selected": Object {
+      "items": Array [
+        Object {
+          "id": "x",
+          "isSelected": true,
+        },
+        Object {
+          "id": "y",
+          "label": "Y",
+        },
+      ],
+    },
+  },
+  "itemToString": [Function],
+  "onChange": [MockFunction] {
+    "calls": Array [
+      Array [
+        Object {
+          "available": Object {
+            "allItems": Array [
+              Object {
+                "id": "y",
+                "label": "Y",
+              },
+              Object {
+                "id": "x",
+                "label": "X",
+              },
+            ],
+            "items": Array [],
+          },
+          "selected": Object {
+            "items": Array [
+              Object {
+                "id": "x",
+                "isSelected": true,
+              },
+              Object {
+                "id": "y",
+                "label": "Y",
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    "results": Array [
+      Object {
+        "type": "return",
+        "value": undefined,
+      },
+    ],
+  },
+  "placeholder": "placeholder",
+  "selectedItems": Array [
+    Object {
+      "id": "y",
+      "label": "Y",
+    },
+  ],
+  "tagWallLabel": null,
+  "tearsheetProps": Object {
+    "closeButton": Object {
+      "onClick": [MockFunction],
+    },
+    "description": "What’s the secret to minced and ground doughnut? Always use small garlic.",
+    "heading": "TagWallFilter Heading",
+    "primaryButton": Object {
+      "onClick": [MockFunction],
+    },
+    "secondaryButton": Object {
+      "onClick": [MockFunction],
+    },
+  },
+}
+`;
+
+exports[`TagWallFilter tests FilterTagFragment should call the on change callback with the latest item state on change 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "available": Object {
+          "allItems": Array [
+            Object {
+              "id": "y",
+              "label": "Y",
+            },
+            Object {
+              "id": "x",
+              "label": "X",
+            },
+          ],
+          "items": Array [],
+        },
+        "selected": Object {
+          "items": Array [
+            Object {
+              "id": "x",
+              "isSelected": true,
+            },
+            Object {
+              "id": "y",
+              "label": "Y",
+            },
+          ],
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests FilterTagFragment should call the on change callback with the latest item state on change 3`] = `
+Object {
+  "availableItems": Array [
+    Object {
+      "id": "x",
+      "label": "X",
+    },
+  ],
+  "dispatchItemChange": [Function],
+  "id": "test-id",
+  "itemState": Object {
+    "available": Object {
+      "allItems": Array [
+        Object {
+          "id": "y",
+          "label": "Y",
+        },
+        Object {
+          "id": "x",
+          "label": "X",
+        },
+      ],
+      "items": Array [
+        Object {
+          "id": "x",
+          "label": undefined,
+        },
+      ],
+    },
+    "selected": Object {
+      "items": Array [
+        Object {
+          "id": "y",
+          "label": "Y",
+        },
+      ],
+    },
+  },
+  "itemToString": [Function],
+  "onChange": [MockFunction] {
+    "calls": Array [
+      Array [
+        Object {
+          "available": Object {
+            "allItems": Array [
+              Object {
+                "id": "y",
+                "label": "Y",
+              },
+              Object {
+                "id": "x",
+                "label": "X",
+              },
+            ],
+            "items": Array [
+              Object {
+                "id": "x",
+                "label": undefined,
+              },
+            ],
+          },
+          "selected": Object {
+            "items": Array [
+              Object {
+                "id": "y",
+                "label": "Y",
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    "results": Array [
+      Object {
+        "type": "return",
+        "value": undefined,
+      },
+    ],
+  },
+  "placeholder": "placeholder",
+  "selectedItems": Array [
+    Object {
+      "id": "y",
+      "label": "Y",
+    },
+  ],
+  "tagWallLabel": null,
+  "tearsheetProps": Object {
+    "closeButton": Object {
+      "onClick": [MockFunction],
+    },
+    "description": "What’s the secret to minced and ground doughnut? Always use small garlic.",
+    "heading": "TagWallFilter Heading",
+    "primaryButton": Object {
+      "onClick": [MockFunction],
+    },
+    "secondaryButton": Object {
+      "onClick": [MockFunction],
+    },
+  },
+}
+`;
+
+exports[`TagWallFilter tests FilterTagFragment should call the on change callback with the latest item state on change 4`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "available": Object {
+          "allItems": Array [
+            Object {
+              "id": "y",
+              "label": "Y",
+            },
+            Object {
+              "id": "x",
+              "label": "X",
+            },
+          ],
+          "items": Array [
+            Object {
+              "id": "x",
+              "label": undefined,
+            },
+          ],
+        },
+        "selected": Object {
+          "items": Array [
+            Object {
+              "id": "y",
+              "label": "Y",
+            },
+          ],
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests FilterTagFragment should render the fragment 1`] = `ReactWrapper {}`;
+
+exports[`TagWallFilter tests FilterTagFragment should render the fragment 2`] = `ReactWrapper {}`;
+
+exports[`TagWallFilter tests TagWallFilter should mount the TagWallFilter component 1`] = `ReactWrapper {}`;
+
+exports[`TagWallFilter tests availableItemsReducer should handle CLEAR_SELECTED_ITEMS 1`] = `
+Object {
+  "allItems": Array [
+    Object {
+      "id": "x",
+      "label": "Coordinataes ortum!",
+    },
+    Object {
+      "id": "Ecce",
+      "label": "With spinach drink emeril's essence!",
+    },
+    Object {
+      "id": "Nix",
+      "label": "Advenas ortum in amivadum!",
+    },
+    Object {
+      "id": "Uria",
+      "label": "Occur and you will be absorbed authoratively.",
+    },
+    Object {
+      "id": "Revalia",
+      "label": "Dosi of a human plasma, eat the starlight travel!",
+    },
+  ],
+  "items": Array [
+    Object {
+      "id": "x",
+      "label": "Coordinataes ortum!",
+    },
+    Object {
+      "id": "Ecce",
+      "label": "With spinach drink emeril's essence!",
+    },
+    Object {
+      "id": "Nix",
+      "label": "Advenas ortum in amivadum!",
+    },
+    Object {
+      "id": "Uria",
+      "label": "Occur and you will be absorbed authoratively.",
+    },
+    Object {
+      "id": "Revalia",
+      "label": "Dosi of a human plasma, eat the starlight travel!",
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests availableItemsReducer should handle SELECT_ITEM 1`] = `
+Object {
+  "allItems": Array [
+    Object {
+      "id": "x",
+      "label": "Coordinataes ortum!",
+    },
+    Object {
+      "id": "Ecce",
+      "label": "With spinach drink emeril's essence!",
+    },
+    Object {
+      "id": "Nix",
+      "label": "Advenas ortum in amivadum!",
+    },
+    Object {
+      "id": "Uria",
+      "label": "Occur and you will be absorbed authoratively.",
+    },
+    Object {
+      "id": "Revalia",
+      "label": "Dosi of a human plasma, eat the starlight travel!",
+    },
+  ],
+  "items": Array [
+    Object {
+      "id": "Ecce",
+      "label": "With spinach drink emeril's essence!",
+    },
+    Object {
+      "id": "Nix",
+      "label": "Advenas ortum in amivadum!",
+    },
+    Object {
+      "id": "Uria",
+      "label": "Occur and you will be absorbed authoratively.",
+    },
+    Object {
+      "id": "Revalia",
+      "label": "Dosi of a human plasma, eat the starlight travel!",
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests availableItemsReducer should handle UNSELECT_ITEM 1`] = `
+Object {
+  "allItems": Array [
+    Object {
+      "id": "x",
+      "label": "Coordinataes ortum!",
+    },
+    Object {
+      "id": "Ecce",
+      "label": "With spinach drink emeril's essence!",
+    },
+    Object {
+      "id": "Nix",
+      "label": "Advenas ortum in amivadum!",
+    },
+    Object {
+      "id": "Uria",
+      "label": "Occur and you will be absorbed authoratively.",
+    },
+    Object {
+      "id": "Revalia",
+      "label": "Dosi of a human plasma, eat the starlight travel!",
+    },
+  ],
+  "items": Array [
+    Object {
+      "id": "Ecce",
+      "label": "The son robs with grace.",
+    },
+    Object {
+      "id": "Nix",
+      "label": "Advenas ortum in amivadum!",
+    },
+    Object {
+      "id": "Uria",
+      "label": "Occur and you will be absorbed authoratively.",
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests selectedItemsReducer should handle CLEAR_SELECTED_ITEMS 1`] = `
+Object {
+  "items": Array [],
+}
+`;
+
+exports[`TagWallFilter tests selectedItemsReducer should handle SELECT_ITEM 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "id": "x",
+      "isSelected": true,
+      "label": "hallo",
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests selectedItemsReducer should handle SELECT_ITEM 2`] = `
+Object {
+  "items": Array [
+    Object {
+      "id": "y",
+      "isSelected": true,
+      "label": "!!!",
+    },
+    Object {
+      "id": "x",
+      "isSelected": true,
+      "label": "hallo",
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter tests selectedItemsReducer should handle UNSELECT_ITEM 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "id": "z",
+      "isSelected": true,
+      "label": "???",
+    },
+    Object {
+      "id": "x",
+      "isSelected": true,
+      "label": "hallo",
+    },
+  ],
+}
+`;

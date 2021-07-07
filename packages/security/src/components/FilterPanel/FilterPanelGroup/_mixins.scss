@@ -1,0 +1,28 @@
+////
+/// Filter panel group mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/font-family';
+@import '@carbon/type/scss/styles';
+
+@mixin filter-panel-group {
+  /// Padding.
+  /// @type Length
+  $filter-panel-group__spacing__padding: $carbon--spacing-03;
+
+  padding-top: $filter-panel-group__spacing__padding;
+  padding-bottom: $filter-panel-group__spacing__padding;
+  border-top: 1px solid $ui-03;
+
+  &__title {
+    @include carbon--type-style($name: caption-01);
+    @include carbon--font-weight($weight: semibold);
+
+    margin-top: 0;
+    margin-bottom: $carbon--spacing-05;
+  }
+}

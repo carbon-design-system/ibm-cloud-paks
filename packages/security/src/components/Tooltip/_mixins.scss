@@ -1,0 +1,55 @@
+////
+/// Tooltip mixins.
+/// @group tooltip
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../../globals/motion/index';
+@import '../../globals/rtl/index';
+
+@import '../Toolbar/mixins';
+
+/// Background color.
+/// @type Color
+$tooltip__color__background: $inverse-02;
+
+/// Arrow dimensions.
+/// @type Length
+$tooltip__arrow__sizing__border: carbon--mini-units(
+  $count: 0.5,
+);
+
+@mixin tooltip__arrow {
+  position: absolute;
+  display: inline-block;
+  border-width: $tooltip__arrow__sizing__border;
+  border-style: solid;
+  border-color: transparent;
+  content: '';
+  opacity: 1;
+  transition-duration: $transition-duration--fast;
+  transition-property: opacity;
+}
+
+@mixin tooltip {
+  @include carbon--type-style($name: body-short-01);
+
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  padding: $carbon--spacing-01 $carbon--spacing-05;
+  background-color: $tooltip__color__background;
+  border-radius: carbon--mini-units($count: 0.25);
+  color: $inverse-01;
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: $transition-duration--fast;
+  transition-property: opacity;
+  white-space: nowrap;
+}

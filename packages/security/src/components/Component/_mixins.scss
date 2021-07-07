@@ -1,0 +1,29 @@
+////
+/// Mixins for base components.
+/// @group component
+/// @copyright IBM Security 2019
+////
+
+@import '../../globals/namespace/index';
+
+/// Mixin to create component styles that conform to a standard way to namespacing, exporting, and
+/// styling all components.
+/// @param {String} $name The name of the component which dictates what the block-level class name
+/// is going to be for the component being styled.
+/// @content The styles for the component and all of its elements.
+/// @access private
+/// @example scss
+///   @include security--component($name: header) {
+///     background-color: $header__color__background;
+///   }
+/// @output css
+///   .security--header {
+///     background-color: #fff;
+///   }
+@mixin security--component($name) {
+  @include export-namespace($name: $name) {
+    @include namespace($selector: $name) {
+      @content;
+    }
+  }
+}

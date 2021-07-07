@@ -1,0 +1,17 @@
+////
+/// Header popover secondary link component.
+/// @group header__popover__link--secondary
+/// @copyright IBM Security 2019
+////
+
+@import '../../Component/mixins';
+
+@import '../mixins';
+
+@import 'mixins';
+
+@include security--component(
+  $name: #{$header__name}__popover__link--secondary
+) {
+  @include header__popover__link--secondary;
+}

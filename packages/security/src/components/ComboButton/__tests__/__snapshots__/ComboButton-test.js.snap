@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComboButton renders a combo button with children and an overflow menu 1`] = `
+<div
+  data-testid="combo-button"
+>
+  <div
+    class="security--combo-button"
+    data-floating-menu-container="true"
+  >
+    <div
+      class="security--combo-button__group"
+    >
+      <button
+        class="security--combo-button--primary bx--btn bx--btn--primary"
+        id="test-primary-item"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="bx--text-truncate--end"
+          title="Primary task"
+        >
+          Primary task
+        </span>
+        <svg
+          aria-hidden="true"
+          aria-label=""
+          class="bx--btn__icon"
+          fill="currentColor"
+          focusable="false"
+          height="20"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 20 20"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"
+          />
+        </svg>
+      </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="open and close list of options"
+        class="security--button bx--btn bx--btn--primary security--combo-button__button security--combo-button__overflow-menu bx--overflow-menu"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="security--combo-button__icon"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ComboButton renders a combo button without an overflow menu 1`] = `
+<div
+  data-testid="combo-button"
+>
+  <div
+    class="security--combo-button"
+    data-floating-menu-container="true"
+  >
+    <div
+      class="security--combo-button__group"
+    >
+      <button
+        class="security--combo-button--primary bx--btn bx--btn--primary"
+        id="test-primary-item"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="bx--text-truncate--end"
+          title="Primary task"
+        >
+          Primary task
+        </span>
+        <svg
+          aria-hidden="true"
+          aria-label=""
+          class="bx--btn__icon"
+          fill="currentColor"
+          focusable="false"
+          height="20"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 20 20"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+`;

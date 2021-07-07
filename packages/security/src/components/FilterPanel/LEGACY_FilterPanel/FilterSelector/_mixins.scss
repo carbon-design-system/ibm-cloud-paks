@@ -1,0 +1,11 @@
+////
+/// Filter selector mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2020
+////
+
+@import '../../FilterPanelCheckbox/mixins';
+
+@mixin filter-selector {
+  @include filter-panel-checkbox;
+}

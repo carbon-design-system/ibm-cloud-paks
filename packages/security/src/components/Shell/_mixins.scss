@@ -1,0 +1,122 @@
+////
+/// Shell mixins.
+/// @group shell
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/layout';
+
+@import '../../globals/motion/index';
+@import '../../globals/theme/mixins';
+
+@import '../Header/mixins';
+@import '../Toolbar/mixins';
+
+@mixin shell {
+  /// Banner height.
+  /// @type Length
+  $shell__banner__sizing__height: carbon--mini-units(
+    $count: 3,
+  );
+
+  &--active {
+    $header: '__header';
+    $toolbar: '__toolbar';
+
+    margin-left: $toolbar__sizing__width;
+
+    &#{$header} > #{$header__namespace} {
+      width: calc(#{$header__sizing__width} - #{$toolbar__sizing__width});
+    }
+
+    &--return {
+      &#{$toolbar},
+      &#{$header} > #{$header__namespace},
+      #{$toolbar__namespace}__panel {
+        top: $shell__banner__sizing__height;
+      }
+    }
+  }
+
+  &__banner {
+    /// Banner background size height.
+    /// @type Length
+    $shell__banner__background__sizing__height: $carbon--layout-02;
+
+    /// Banner background size width.
+    /// @type Length
+    $shell__banner__background__sizing__width: $carbon--layout-07;
+
+    @include security--theme--cg10__cg100;
+
+    position: fixed;
+    z-index: $header__layer;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    height: inherit;
+    align-items: center;
+    padding-left: $carbon--spacing-05;
+    background-color: $ui-01;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: $shell__banner__background__sizing__width
+      $shell__banner__background__sizing__height;
+    transition: $transition-duration background-size $timing-function;
+
+    &,
+    &:hover,
+    &:visited {
+      color: $text-01;
+    }
+
+    &__container {
+      height: $shell__banner__sizing__height;
+    }
+
+    &__icon {
+      fill: $icon-03;
+    }
+
+    &__text {
+      @include carbon--type-style($name: caption-01);
+
+      overflow: hidden;
+      max-width: carbon--mini-units($count: 53);
+      padding-left: $carbon--spacing-04;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:focus,
+    &:hover {
+      background-size: ($shell__banner__background__sizing__width * 2)
+        $shell__banner__background__sizing__height;
+    }
+
+    &:focus {
+      @include focus-outline($type: outline);
+    }
+  }
+
+  &__skip-to-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    &__link.#{$prefix}--skip-to-content:focus {
+      left: auto;
+      border-color: $focus;
+      margin-top: $header__spacing__padding;
+      background-color: $interactive-01;
+      color: $text-04;
+    }
+  }
+}

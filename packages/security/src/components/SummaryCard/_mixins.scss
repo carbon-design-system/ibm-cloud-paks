@@ -1,0 +1,245 @@
+////
+/// Summary card mixins.
+/// @group summary-card
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../../globals/namespace/index';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@mixin summary-card {
+  /// Container height.
+  /// @type Length
+  /// @access private
+  $summary-card__container__sizing__height: carbon--mini-units(
+    $count: 6,
+  );
+
+  /// Summary card header height.
+  /// @type Length
+  /// @access private
+  $header--height: carbon--mini-units(
+    $count: 4,
+  );
+
+  /// Summary card body height.
+  /// @type Length
+  /// @access private
+  $body--height: carbon--mini-units(
+    $count: 38,
+  );
+
+  /// Summary card footer height.
+  /// @type Length
+  /// @access private
+  $footer--height: carbon--mini-units(
+    $count: 6,
+  );
+
+  /// Summary card overlay z-index.
+  /// @type Value
+  /// @access private
+  $overlay--z-index: z(
+    $layer: overlay,
+  );
+
+  position: relative;
+  display: flex;
+  min-width: carbon--mini-units($count: 36);
+  height: $header--height + $body--height + $footer--height;
+  flex-direction: column;
+
+  &__container {
+    padding-top: $summary-card__container__sizing__height;
+  }
+
+  &__batch-actions {
+    height: $summary-card__container__sizing__height;
+  }
+
+  &__body {
+    @include carbon--type-style($name: body-long-01);
+
+    display: flex;
+
+    // `hidden` because the ScrollGradient will handle overflow:
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: $carbon--spacing-05;
+    margin: 0;
+  }
+
+  &__header {
+    display: flex;
+    height: $header--height;
+    padding: $carbon--spacing-05 $carbon--spacing-05 0 $carbon--spacing-05;
+
+    &__title {
+      @include carbon--type-style($name: caption-01);
+
+      flex-grow: 1;
+      padding: 0;
+      margin: 0;
+      color: $text-02;
+    }
+  }
+
+  &__footer {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    border-top: 1px solid $ui-02;
+    background-color: $ui-01;
+  }
+
+  &__select {
+    /// Summary card select padding.
+    /// @type Length
+    $summary-card__select__spacing__padding: $carbon--spacing-03;
+
+    display: flex;
+    align-items: center;
+    padding-right: $summary-card__select__spacing__padding;
+    padding-left: $summary-card__select__spacing__padding;
+
+    &__checkbox {
+      @include text-overflow;
+
+      max-width: carbon--mini-units($count: 20);
+    }
+  }
+
+  &__action {
+    // Ensure that actions are always on top of the overlay:
+    z-index: $overlay--z-index + 1;
+    overflow: hidden;
+    max-width: unset;
+    flex: 1;
+
+    // Ensure that animating overlay doesn't show through due to transparent background:
+    background-color: inherit;
+
+    &__text {
+      @include text-overflow;
+
+      overflow-y: hidden;
+    }
+
+    // Accommodates the loading spinner:
+    &.#{$namespace}button--loading {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &--icon-only {
+      flex: 0;
+    }
+  }
+
+  &__action-overlay {
+    position: absolute;
+    z-index: $overlay--z-index;
+    top: -($body--height - $carbon--spacing-05);
+    right: 0;
+    bottom: $footer--height;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: $ui-01;
+    cursor: default;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__title,
+    &__content {
+      @include carbon--type-style($name: body-long-01);
+
+      margin: 0;
+    }
+
+    &__title {
+      padding: $carbon--spacing-05;
+    }
+
+    &__content {
+      height: $body--height - $header--height - $footer--height -
+        carbon--mini-units($count: 2);
+      padding: 0 $carbon--spacing-05;
+    }
+
+    &__close-button {
+      align-self: flex-start;
+
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: $text-01;
+
+        .#{$prefix}--btn__icon path {
+          fill: $icon-01;
+        }
+      }
+
+      .#{$prefix}--btn__icon {
+        width: carbon--mini-units($count: 2.5);
+        height: carbon--mini-units($count: 2.5);
+        margin-left: 0;
+      }
+    }
+
+    &__transition {
+      &--appear,
+      &--enter {
+        opacity: 0;
+        transform: translate3d(0, $body--height, 0);
+
+        &--active {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+          transition: all $duration--moderate-02;
+          transition-timing-function: motion(entrance, expressive);
+        }
+      }
+
+      &--leave {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+
+        &--active {
+          opacity: 0;
+          transform: translate3d(0, $body--height, 0);
+          transition: all $duration--moderate-02;
+          transition-timing-function: motion(exit, expressive);
+        }
+      }
+    }
+  }
+
+  &__action-overlay--transparent {
+    position: absolute;
+
+    // Ensure that this transparent div is always beneath the overlay and actions:
+    z-index: $overlay--z-index - 1;
+    top: -($body--height + $header--height);
+    right: 0;
+    bottom: $footer--height;
+    left: 0;
+    background-color: $overlay-01;
+  }
+}

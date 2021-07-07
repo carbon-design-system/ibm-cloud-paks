@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButtonBar renders the 'lg' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the 'md' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the 'sm' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the 'xl' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the length of '1' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the length of '2' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the length of '3' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the length of '4' variation 1`] = `ShallowWrapper {}`;
+
+exports[`IconButtonBar renders the length of '5' variation 1`] = `ShallowWrapper {}`;

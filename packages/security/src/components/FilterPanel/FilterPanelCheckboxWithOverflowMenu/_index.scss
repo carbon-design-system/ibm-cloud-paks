@@ -1,0 +1,50 @@
+////
+/// Filter panel checkbox with overflow menu styles.
+/// @group filter-panel
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import 'carbon-components/scss/globals/scss/vars';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import '../../OverflowMenu/index';
+
+@import '../../Component/mixins';
+
+@include security--component($name: filter-panel-checkbox-with-overflow-menu) {
+  $block: &;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  &--open,
+  &:hover,
+  &:focus-within {
+    background-color: $field-01;
+  }
+
+  &__overflow-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $carbon--layout-02;
+    height: $carbon--layout-02;
+    background-color: $field-01;
+  }
+
+  &__overflow-options {
+    width: 100%;
+
+    .#{$prefix}--overflow-menu-options__option {
+      height: $carbon--layout-02;
+    }
+
+    .#{$prefix}--overflow-menu-options__btn {
+      max-width: none;
+      justify-content: flex-end;
+    }
+  }
+}

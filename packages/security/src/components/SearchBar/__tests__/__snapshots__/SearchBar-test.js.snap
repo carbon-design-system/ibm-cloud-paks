@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar Rendering disables the submit button with no selected scopes 1`] = `ShallowWrapper {}`;
+
+exports[`SearchBar Rendering disables the submit button with no value 1`] = `ShallowWrapper {}`;
+
+exports[`SearchBar Rendering renders 1`] = `ShallowWrapper {}`;
+
+exports[`SearchBar Rendering renders an initial value 1`] = `ShallowWrapper {}`;
+
+exports[`SearchBar Rendering renders scopes 1`] = `ShallowWrapper {}`;
+
+exports[`SearchBar Rendering renders selected scopes 1`] = `ShallowWrapper {}`;

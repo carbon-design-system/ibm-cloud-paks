@@ -1,0 +1,23 @@
+////
+/// File uploader component.
+/// @group file-uploader
+/// @copyright IBM Security 2019
+////
+
+@import '@carbon/colors/scss/colors';
+@import 'carbon-components/scss/components/file-uploader/file-uploader';
+
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/namespace/index';
+
+@include export-namespace($name: file-uploader) {
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    fill: $carbon--gray-10;
+  }
+
+  .#{$prefix}--file__container .#{$prefix}--btn--primary:hover,
+  .#{$prefix}--file__container .#{$prefix}--btn--secondary:hover {
+    outline: none;
+  }
+}

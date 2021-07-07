@@ -1,0 +1,27 @@
+////
+/// Description module.
+/// @group description-module
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/type/scss/styles';
+
+@import '../../Component/mixins';
+@import '../variables';
+
+@include security--component($name: #{$layout-modules__name}--description) {
+  padding-bottom: $carbon--layout-03;
+
+  &__content {
+    @include carbon--type-style($name: body-long-01);
+
+    margin-top: 0;
+    margin-bottom: map-get($map: $body-long-01, $key: font-size) *
+      map-get($map: $body-long-01, $key: line-height);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

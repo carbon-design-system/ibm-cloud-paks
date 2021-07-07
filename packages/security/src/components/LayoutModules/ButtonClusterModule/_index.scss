@@ -1,0 +1,33 @@
+////
+/// Button cluster module.
+/// @group button-cluster-module
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../../globals/border/index';
+@import '../../Component/mixins';
+@import '../variables';
+
+@include security--component($name: #{$layout-modules__name}--button-cluster) {
+  padding-bottom: $carbon--layout-01;
+
+  &__button {
+    $button-cluster__button__border: $border__sizing__width solid $ui-03;
+
+    display: flex;
+    flex-flow: column;
+    border-bottom: $button-cluster__button__border;
+
+    &:first-of-type {
+      border-top: $button-cluster__button__border;
+    }
+
+    > .#{$prefix}--btn {
+      max-width: unset;
+    }
+  }
+}

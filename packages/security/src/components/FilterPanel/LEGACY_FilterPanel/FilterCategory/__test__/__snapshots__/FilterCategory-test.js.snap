@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterCategory does not render without filters 1`] = `ShallowWrapper {}`;
+
+exports[`FilterCategory does not render without subcategories 1`] = `ShallowWrapper {}`;
+
+exports[`FilterCategory renders 1`] = `ShallowWrapper {}`;
+
+exports[`FilterCategory should not overwrite \`labels\` when unique props defined 1`] = `ShallowWrapper {}`;

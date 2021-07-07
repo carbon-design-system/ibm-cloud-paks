@@ -1,0 +1,15 @@
+////
+/// Header popover header component.
+/// @group header__popover__header
+/// @copyright IBM Security 2019
+////
+
+@import '../../Component/mixins';
+
+@import '../mixins';
+
+@import 'mixins';
+
+@include security--component($name: #{$header__name}__popover__header) {
+  @include header__popover__header;
+}

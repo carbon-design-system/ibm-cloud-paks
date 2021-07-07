@@ -1,12 +1,15 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @import '../generated/feature-flags/feature-flags';
+
 @import '../../cloud-cognitive/src/index';
+@import '../../security/src/index';
+
 @import 'carbon-components/scss/globals/scss/styles';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element

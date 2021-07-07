@@ -1,0 +1,90 @@
+////
+/// Important content area component.
+/// @group ica
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/type/scss/styles';
+@import '@carbon/themes/scss/tokens';
+
+@import 'ICASkeleton/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: ica) {
+  &__label {
+    @include carbon--type-style($name: label-01);
+
+    display: block;
+    margin: 0;
+    color: $text-02;
+  }
+
+  &__value {
+    @include carbon--type-style($name: productive-heading-04);
+
+    margin-bottom: 0;
+  }
+
+  &__total {
+    @include carbon--type-style($name: body-short-01);
+
+    padding-top: $carbon--spacing-01 + $carbon--spacing-04;
+    margin-bottom: 0;
+  }
+
+  &__trend {
+    margin-top: $carbon--spacing-03;
+    vertical-align: top;
+  }
+
+  &__row {
+    display: flex;
+  }
+
+  &__percentage {
+    @include carbon--type-style($name: productive-heading-04);
+  }
+
+  &__percentage-mark {
+    @include carbon--type-style($name: body-short-01);
+  }
+
+  // Lg Styling
+  &--lg & {
+    &__value,
+    &__percentage {
+      @include carbon--type-style($name: productive-heading-06);
+    }
+
+    &__total,
+    &__percentage-mark {
+      @include carbon--type-style($name: productive-heading-03);
+
+      padding-top: $carbon--spacing-03 + $carbon--spacing-04;
+    }
+  }
+
+  //  Styling
+  &--xl & {
+    &__label {
+      @include carbon--type-style($name: body-short-01);
+    }
+
+    &__value,
+    &__percentage {
+      @include carbon--type-style($name: productive-heading-07);
+    }
+
+    &__total,
+    &__percentage-mark {
+      @include carbon--type-style($name: productive-heading-04);
+
+      padding-top: $carbon--spacing-06;
+    }
+
+    &__trend {
+      margin-top: $carbon--spacing-04;
+    }
+  }
+}

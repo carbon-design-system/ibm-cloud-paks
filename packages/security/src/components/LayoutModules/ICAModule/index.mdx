@@ -1,0 +1,156 @@
+import { parameters } from '../../../../.storybook/preview';
+import { Interaction } from './ICAModule-story';
+
+import anatomy from './images/anatomy.png';
+
+import interactions from './images/interactions.png';
+
+import variants from './images/variants.png';
+
+import doImage from './images/do.png';
+import dont from './images/dont.png';
+
+# ICAModule
+
+The ICA module provides a means to orderly layout at-a-glance statistics.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Interactions](#interactions)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Examples](#examples)  
+[↳ References](#references)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The ICA module can be built using a combination of the `ICAModule`,
+[grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow), and
+<LinkTo kind="components-ica" story="default">`ICA`</LinkTo> components.
+
+Everything passed in as a
+[render prop](https://reactjs.org/docs/render-props.html) child of `ICAModule`
+will be rendered.
+
+<Canvas>
+  <Story id="layout-modules-icamodule--default" parameters={parameters} />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `ICAModule` will be forwarded along to the
+underlying ICA module container.
+
+#### `hover`
+
+Use the `hover` prop to specify whether the hover variant should be used.
+
+<Canvas withSource="none">
+  <Interaction parameters={parameters} />
+</Canvas>
+
+```jsx
+<ICAModule hover />
+```
+
+#### Render props
+
+In order to make sure that everything works as intended, it’s important to pass
+all of the props of the component as fields on the object given to the prop
+getter. For example, to add a `className`:
+
+```jsx
+<Column {...getLayoutProps({ className: 'className' })} />
+```
+
+### Anatomy
+
+1. **ICA:** This is the ICA itself, it comprises a value and a label. Spacing
+   between the value and label, and between individual ICAs, is defined in the
+   module.
+2. **ICA spacer (optional):** If there are multiple rows of ICAs, use the
+   16-pixel spacer `$spacing-05` to separate the rows.
+3. **Bottom spacer:** The is a bottom spacer of 32px (`$spacing-07`) included
+   inside the module.
+
+<img alt="`ICAModule` anatomy" src={anatomy} />
+
+### Interactions
+
+If the ICA needs to be interactive, a background hover can be placed on the grid
+columns. This adds 16px to the height of the ICA module on hover.
+
+<img alt="`ICAModule` interactions" src={interactions} />
+
+<Source id="layout-modules-icamodule--interaction" />
+
+### Variants
+
+**Coming soon...**  
+Right now the ICA has a default size. Soon there will also be a large (`lg`) and
+extra-large (`xl`) variant.
+
+<img alt="`ICA` variants" src={variants} />
+
+### Grid placement
+
+Individual ICAs within the module should span no more than 4 columns. Following
+the [narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation, the ICA values should always align to grid columns. As
+illustrated in the [Anatomy](#anatomy) section, ICAs can also be stacked.
+
+<Row>
+  <Column>
+    <img alt="`ICAModule` do" src={doImage} />
+  </Column>
+
+  <Column>
+    <img alt="`ICAModule` don't" src={dont} />
+  </Column>
+</Row>
+
+```jsx
+<ICAModule>
+  {({ getLayoutProps }) => (
+    <Row>
+      <Column {...getLayoutProps({ lg: 3 })}>
+        <ICA />
+      </Column>
+
+      <Column {...getLayoutProps({ lg: 3 })}>
+        <ICA />
+      </Column>
+
+      <Column {...getLayoutProps({ lg: 3 })}>
+        <ICA />
+      </Column>
+    </Row>
+  )}
+</ICAModule>
+```
+
+### Examples
+
+<Row>
+  <Detail />
+  <Overview />
+</Row>
+
+### References
+
+- [Grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+- <LinkTo kind="components-ica" story="default">
+    ICA
+  </LinkTo>
+- [Render Props](https://reactjs.org/docs/render-props.html)
+- <LinkTo kind="layout-modules-titlebarmodule" story="default">
+    TitleBarModule
+  </LinkTo>
+
+<Troubleshooting />

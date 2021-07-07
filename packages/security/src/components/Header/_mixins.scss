@@ -1,0 +1,501 @@
+////
+/// Header mixins.
+/// @group header
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/layout';
+
+@import '../../globals/motion/index';
+@import '../../globals/namespace/index';
+
+@import '../../platform/body/mixins';
+
+@import '../IconButton/mixins';
+
+@import 'variables';
+
+/// Name.
+/// @type String
+$header__name: header;
+
+/// Namespace.
+/// @type String
+$header__namespace: get-component-namespace(
+  $component-name: $header__name,
+);
+
+/// Background color.
+/// @type Color
+$header__color__background: $body__color__background;
+
+/// Width.
+/// @type Length
+$header__sizing__width: 100%;
+
+/// Transition duration.
+/// @type Length
+$header__transition__duration: $transition-duration--fast;
+
+/// Transition timing function.
+/// @type Length
+$header__transition__timing-function: $timing-function;
+
+@mixin header__popover__button--icon {
+  @include button--icon;
+
+  margin-left: auto;
+  color: $inverse-01;
+  transition: $header__transition__duration background-color
+    $header__transition__timing-function;
+
+  &:focus,
+  &:hover {
+    background-color: $inverse-hover-ui;
+    outline-color: $inverse-focus-ui;
+  }
+}
+
+@mixin header__popover__item--focus {
+  @include focus-outline($type: outline);
+
+  outline-color: $inverse-focus-ui;
+}
+
+@mixin header {
+  /// Height.
+  /// @type Length
+  $header__sizing__height: carbon--mini-units(
+    $count: 6,
+  );
+
+  /// Group margin.
+  /// @type Length
+  $header__group__spacing__margin: $carbon--spacing-07;
+
+  // Popover border width.
+  /// @type Length
+  $header__popover__sizing__border: carbon--mini-units(
+    $count: 0.125,
+  );
+
+  /// Popover spacing.
+  /// @type Length
+  $header__popover__spacing__padding: $carbon--spacing-06;
+
+  /// Profile margin.
+  /// @type Length
+  $header__profile__spacing__margin: $carbon--spacing-05;
+
+  $root: &;
+
+  position: fixed;
+  z-index: $header__layer;
+  top: 0;
+
+  display: flex;
+  width: inherit;
+  height: inherit;
+  align-items: center;
+  padding-top: inherit;
+  background-color: inherit;
+  color: inherit;
+
+  &__container {
+    width: $header__sizing__width;
+    height: $header__sizing__height;
+    padding-top: $header__spacing__padding;
+    background-color: $header__color__background;
+  }
+
+  &__link {
+    @include carbon--type-style($name: body-short-01);
+
+    margin-left: $header__group__spacing__margin;
+
+    &,
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover,
+    &:focus {
+      color: $text-02;
+    }
+
+    &__title--domain {
+      @include carbon--type-style($name: heading-01);
+    }
+  }
+
+  &__group {
+    display: flex;
+    padding-left: unset;
+    margin-top: unset;
+    margin-bottom: unset;
+    margin-left: auto;
+    list-style: none;
+
+    &--active {
+      margin-right: $header__group__spacing__margin;
+    }
+  }
+
+  &__button {
+    &::after {
+      height: 100%;
+      content: '';
+    }
+
+    &--active::after {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: carbon--mini-units($count: 0.5);
+      background-color: $interactive-01;
+      transition: $transition-duration height
+        $button--icon__transition__timing-function;
+    }
+
+    &--notifications::before {
+      /// Marker dimensions.
+      /// @type Length
+      $header__button__marker__sizing__dimensions: carbon--mini-units(
+        $count: 1,
+      );
+
+      position: absolute;
+      z-index: z($layer: floating);
+      top: carbon--mini-units($count: 1.5);
+      right: carbon--mini-units($count: 1);
+
+      display: inline-block;
+      width: $header__button__marker__sizing__dimensions;
+      height: $header__button__marker__sizing__dimensions;
+      background-color: $support-01;
+      border-radius: 50%;
+      content: '';
+    }
+  }
+
+  &__popover {
+    // Popover border color.
+    /// @type Color
+    $header__popover__color__border: $inverse-hover-ui;
+
+    /// Profile active background color.
+    /// @type Color
+    $header__popover__color__background--active: $inverse-hover-ui;
+
+    @include carbon--type-style($name: body-short-01);
+
+    position: absolute;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: $inverse-02;
+    color: $inverse-01;
+
+    @include carbon--breakpoint($name: md) {
+      right: carbon--mini-units($count: 1);
+      width: carbon--mini-units($count: 34);
+    }
+
+    &--focus:focus {
+      outline: none;
+    }
+
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: $header__popover__spacing__padding;
+    }
+
+    &__title {
+      @include carbon--type-style($name: productive-heading-03);
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      padding-right: $carbon--spacing-02;
+      padding-left: $header__popover__spacing__padding;
+    }
+
+    &__button {
+      @include header__popover__button--icon;
+    }
+
+    &__label {
+      @include carbon--type-style($name: heading-01);
+    }
+
+    &__list {
+      max-height: carbon--mini-units($count: 70);
+      padding-left: unset;
+      list-style: none;
+    }
+
+    &__list-item {
+      /// Notification padding.
+      /// @type Length
+      $header__notification__spacing__padding: $carbon--spacing-06;
+
+      position: relative;
+
+      display: block;
+      padding-right: $header__notification__spacing__padding;
+      padding-left: $carbon--spacing-05;
+      color: unset;
+      text-decoration: initial;
+      transition: $header__transition__duration background-color
+        $header__transition__timing-function;
+
+      #{$root}__notification {
+        box-shadow: inset 0 -#{$header__popover__sizing__border} 0 0
+          $header__popover__color__border;
+
+        &__wrapper {
+          margin-right: -$header__notification__spacing__padding;
+        }
+
+        &__button {
+          display: flex;
+          width: $carbon--layout-04;
+          height: 100%;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+
+      &:focus,
+      &:hover {
+        background-color: $header__popover__color__background--active;
+
+        #{$root}__notification__button {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      &:focus {
+        @include focus-outline($type: outline);
+      }
+
+      &:last-of-type #{$root}__notification {
+        box-shadow: none;
+      }
+    }
+
+    &__icon {
+      fill: currentColor;
+    }
+
+    &__profile {
+      &--large {
+        margin-right: $header__profile__spacing__margin;
+      }
+
+      &__header {
+        &__icon {
+          flex: none;
+          margin-right: $header__profile__spacing__margin;
+          margin-bottom: auto;
+        }
+
+        &__title,
+        &__email {
+          display: block;
+          word-wrap: anywhere;
+        }
+
+        &__title {
+          @include carbon--type-style($name: productive-heading-03);
+
+          hyphens: auto;
+          word-break: break-word;
+        }
+
+        &__email {
+          @include carbon--type-style($name: caption-01);
+
+          word-break: break-all;
+        }
+      }
+
+      &__description {
+        padding-right: $header__popover__spacing__padding;
+        padding-bottom: $header__profile__spacing__margin;
+        padding-left: $header__popover__spacing__padding;
+      }
+
+      &__body {
+        &--account {
+          padding-right: $header__popover__spacing__padding;
+          padding-bottom: $header__profile__spacing__margin;
+          padding-left: $header__popover__spacing__padding;
+        }
+
+        &__label {
+          @include carbon--type-style($name: caption-01);
+        }
+
+        &__name {
+          @include carbon--type-style($name: body-short-02);
+
+          overflow: hidden;
+          width: carbon--mini-units($count: 26);
+          text-align: left;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        &__accordion {
+          /// Accordion selector.
+          /// @type String
+          $carbon--accordion: '.#{$prefix}--accordion';
+
+          > #{$carbon--accordion}__item--active #{$carbon--accordion}__arrow {
+            transform: rotate3d(0, 0, 1, 270deg);
+          }
+
+          &__item {
+            &:last-child {
+              border-width: 0;
+            }
+
+            #{$carbon--accordion} {
+              &__arrow,
+              &__heading {
+                color: inherit;
+              }
+
+              &__arrow {
+                margin-right: $header__profile__spacing__margin;
+                margin-left: unset;
+                fill: currentColor;
+                transform: rotate3d(0, 0, 1, 90deg);
+              }
+
+              &__heading {
+                flex-direction: row-reverse;
+
+                &:focus,
+                &:hover {
+                  &::before {
+                    background-color: $header__popover__color__background--active;
+                  }
+                }
+
+                &:focus::before {
+                  @include header__popover__item--focus;
+                }
+              }
+
+              &__title {
+                margin-left: $header__popover__spacing__padding;
+              }
+
+              &__content {
+                padding: unset;
+                margin-left: unset;
+              }
+            }
+          }
+        }
+
+        &__list {
+          padding-left: unset;
+          list-style: none;
+        }
+
+        &__account {
+          position: relative;
+
+          &__button {
+            @include button-reset;
+            @include carbon--type-style($name: body-short-01);
+
+            padding: $header__profile__spacing__margin
+              $header__popover__spacing__padding;
+            color: inherit;
+            text-align: left;
+
+            &:focus,
+            &:hover {
+              background-color: $header__popover__color__background--active;
+            }
+
+            &:focus {
+              @include header__popover__item--focus;
+            }
+
+            &::before {
+              position: absolute;
+              right: $header__popover__spacing__padding;
+              bottom: 0;
+              left: $header__popover__spacing__padding;
+              display: inline-block;
+              height: $header__popover__sizing__border;
+              background-color: $header__popover__color__border;
+              content: '';
+              transform: translate3d(0, -#{$carbon--spacing-01}, 0);
+            }
+          }
+
+          &:last-of-type &__button::before {
+            height: 0;
+          }
+        }
+      }
+
+      &__footer__logout {
+        margin-left: auto;
+      }
+    }
+
+    &__footer {
+      @include carbon--type-style($name: body-short-01);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $carbon--spacing-04 $header__popover__spacing__padding;
+      border-top: $header__popover__sizing__border solid
+        $header__popover__color__border;
+    }
+  }
+
+  &__transition {
+    @include transition--opacity;
+
+    &--enter,
+    &--leave {
+      &--active {
+        transition-delay: 0.025s;
+        transition-duration: $header__transition__duration;
+        transition-property: opacity, transform;
+      }
+    }
+    &--enter {
+      transform: translate3d(0, -#{$header__sizing__height}, 0);
+
+      &--active {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+
+  .selectable-text {
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+}

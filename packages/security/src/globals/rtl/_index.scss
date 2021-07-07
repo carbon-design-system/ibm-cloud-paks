@@ -1,0 +1,69 @@
+////
+/// Right-to-left assets for internationalization.
+/// @group rtl
+/// @copyright IBM Security 2019
+////
+
+/// Helper mixin for right-to-left.
+/// @content
+/// @example scss
+///   .button {
+///     text-align: left;
+///
+///     @include rtl {
+///       text-align: right;
+///     }
+///   }
+/// @output css
+///   .button {
+///     text-align: left;
+///   }
+///
+///   [dir='rtl'] button {
+///     text-align: right;
+///   }
+@mixin rtl {
+  $rtl: '[dir="rtl"]';
+
+  &#{$rtl},
+  #{$rtl} & {
+    @content;
+  }
+}
+
+/// Flips opposite `box-shadow` values.
+/// @param {List<*>} $box-shadow The `box-shadow` to flip.
+/// @returns {List<*>} The flipped `box-shadow`.
+@function reverse-box-shadow($box-shadow) {
+  $reversed-box-shadow: ();
+
+  @for $index from 1 through length($box-shadow) {
+    $value: nth($box-shadow, $index);
+
+    $reversed-box-shadow: append(
+      $reversed-box-shadow,
+      if(($index == 1), ($value * -1), $value)
+    );
+  }
+
+  @return $reversed-box-shadow;
+}
+
+/// Flip opposite shorthand values.
+/// @param {List<*>} $shorthand The list of values to flip.
+/// @returns {List<*>} The flipped list of values.
+@function reverse-shorthand($shorthand) {
+  @return nth($list: $shorthand, $n: 1) nth($list: $shorthand, $n: 4)
+    nth($list: $shorthand, $n: 3) nth($list: $shorthand, $n: 2);
+}
+
+/// Flip 'transform' function values for right to left.
+/// @param {List<*>} $transform The list of values to flip.
+/// @returns {List<*>} The flipped list of values.
+@function reverse-transform($transform) {
+  @return (
+    (nth($list: $transform, $n: 1) * -1),
+    nth($list: $transform, $n: 2),
+    nth($list: $transform, $n: 3)
+  );
+}

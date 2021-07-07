@@ -1,0 +1,15 @@
+////
+/// Filter panel accordion styles.
+/// @group filter-panel
+/// @copyright IBM Security 2020
+////
+
+@import '../../Accordion/index';
+
+@import '../../Component/mixins';
+
+@import 'mixins';
+
+@include security--component($name: filter-panel-accordion) {
+  @include filter-panel-accordion;
+}

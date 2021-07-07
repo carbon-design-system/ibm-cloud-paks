@@ -1,0 +1,50 @@
+////
+/// Legacy filter search mixins.
+/// @group filter-panel
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../../FilterPanelSearch/mixins';
+
+@mixin LEGACY-filter-search {
+  @include filter-panel-search;
+
+  /// Padding.
+  /// @type Length
+  $filter-search__spacing__padding: $carbon--spacing-03;
+
+  &__list {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__subcategory {
+    padding-top: $filter-search__spacing__padding;
+    padding-bottom: $filter-search__spacing__padding;
+    border-top: carbon--mini-units($count: 0.125) solid $ui-04;
+
+    &__title {
+      @include carbon--type-style($name: caption-01);
+
+      margin-top: 0;
+      margin-bottom: $filter-search__spacing__padding;
+    }
+  }
+
+  &__results {
+    &--none {
+      @include carbon--type-style($name: caption-01);
+    }
+
+    &--visible {
+      max-height: carbon--mini-units($count: 38);
+      overflow-y: auto;
+    }
+  }
+}

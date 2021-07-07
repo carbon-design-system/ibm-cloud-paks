@@ -1,0 +1,21 @@
+////
+/// Search component.
+/// @group search
+/// @copyright IBM Security 2019 - 2020
+////
+
+@import 'carbon-components/scss/components/search/search';
+
+@import '@carbon/themes/scss/tokens';
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../globals/namespace/index';
+
+@include export-namespace($name: search) {
+  .#{$prefix}--search {
+    &-button,
+    &-close {
+      color: $icon-01;
+    }
+  }
+}

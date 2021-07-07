@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect } from 'react';
-import { withInfo } from '@storybook/addon-info';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
+import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs/blocks';
+import { withInfo } from '@storybook/addon-info';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Column, Row } from 'carbon-components-react';
+import React, { useEffect } from 'react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';
 
@@ -87,6 +91,17 @@ const carbonViewports = {
 
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
+  docs: {
+    components: {
+      ArgsTable,
+      Canvas,
+      Column,
+      LinkTo,
+      Row,
+      Source,
+      Story,
+    },
+  },
   layout: 'centered',
   options: {
     storySort: (a, b) => {

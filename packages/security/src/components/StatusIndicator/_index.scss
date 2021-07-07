@@ -1,0 +1,121 @@
+////
+/// Status indicator component.
+/// @group status-indicator
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/vars';
+
+@import '../../platform/body/mixins';
+
+@import '../Button/index';
+
+@import '../Component/mixins';
+
+@include security--component($name: status-indicator) {
+  $root: &;
+
+  /// Margin.
+  /// @type Length
+  $status-indicator__spacing__margin: $carbon--spacing-02;
+
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    @include carbon--type-style($name: heading-02);
+
+    margin-top: 0;
+    margin-bottom: $status-indicator__spacing__margin;
+  }
+
+  &__list {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  &__step {
+    /// Error color.
+    /// @type Color
+    $status-indicator--error__color: $support-01;
+
+    &__icon-wrapper,
+    &-wrapper {
+      display: flex;
+      align-items: center;
+
+      > .#{$prefix}--inline-loading__text {
+        color: $body__color__text;
+      }
+    }
+
+    &__icon-wrapper {
+      /// Wrapper dimensions.
+      /// @type Length
+      $status-indicator__wrapper__sizing__dimensions: carbon--mini-units(
+        $count: 4,
+      );
+
+      width: $status-indicator__wrapper__sizing__dimensions;
+      height: $status-indicator__wrapper__sizing__dimensions;
+      justify-content: center;
+    }
+
+    &__icon {
+      /// Icon dimensions.
+      /// @type Length
+      $status-indicator__icon__sizing__dimensions: carbon--mini-units(
+        $count: 2,
+      );
+
+      width: $status-indicator__icon__sizing__dimensions;
+      height: $status-indicator__icon__sizing__dimensions;
+    }
+
+    &__label {
+      @include carbon--type-style($name: body-short-01);
+
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &--failed__icon {
+      fill: $status-indicator--error__color;
+    }
+
+    &--incomplete {
+      /// Incomplete color.
+      /// @type Color
+      $status-indicator__icon--incomplete__color: $disabled-03;
+
+      &__icon {
+        fill: $status-indicator__icon--incomplete__color;
+      }
+
+      &__label {
+        color: $status-indicator__icon--incomplete__color;
+      }
+    }
+
+    &__error-message {
+      @include carbon--type-style($name: label-01);
+
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: $status-indicator__spacing__margin;
+      margin-left: $carbon--spacing-07;
+      color: $status-indicator--error__color;
+    }
+  }
+
+  &__button--retry {
+    margin-top: $status-indicator__spacing__margin;
+  }
+}
