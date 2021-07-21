@@ -52,6 +52,16 @@ export const utilCheckUpdateVerticalSpace = (
   update.headerHeight = headerRef.current ? headerRef.current.clientHeight : 0;
   update.headerWidth = headerRef.current ? headerRef.current.offsetWidth : 0;
 
+  // The header offset is the vertical distance from the top of the document to
+  // the page header, which we obtain using getBoundingClientRect() for robust
+  // behavior. We use this offset as the scroll/fixed threshold.
+  const doc = headerRef.current?.ownerDocument;
+  update.headerOffset = headerRef.current
+    ? headerRef.current.getBoundingClientRect().top +
+      (doc.defaultView.pageYOffset || doc.documentElement.scrollTop) -
+      (doc.documentElement.clientTop || doc.body.clientTop || 0)
+    : 0;
+
   update.breadcrumbRowHeight = breadcrumbRowEl
     ? breadcrumbRowEl.clientHeight
     : 0;
