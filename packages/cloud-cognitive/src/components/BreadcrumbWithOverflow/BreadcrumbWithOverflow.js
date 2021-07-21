@@ -25,7 +25,10 @@ import {
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import {
+  deprecateProp,
+  extractShapesArray,
+} from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
@@ -33,11 +36,56 @@ const componentName = 'BreadcrumbWithOverflow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+const getHref = (shape) => {
+  // This function should extract href from item
+  // It expects that the href is attached either to the item or direct child
+  // It prefers item.props.href
+  return shape?.href ? shape.href : shape?.children?.props?.href;
+};
+
+const getTitle = (shape) => {
+  // This function should extract text based title from the item.
+  // It prefers in this order
+  // - shape.data-title
+  // - shape.title
+  // - shape.label if string
+  // - shape.label.props.children if string. This case is likely if an <a /> is used inside a BreadcrumbItem
+  let useAsTitle = null;
+
+  if (shape) {
+    /* istanbul ignore next if */ // list represents preferred order with checks, no else case expected
+    if (shape['data-title']) {
+      useAsTitle = shape['data-title'];
+    } else if (shape.title) {
+      useAsTitle = shape.title;
+    } else if (typeof shape.label === 'string') {
+      useAsTitle = shape.label;
+    } else if (typeof shape?.label?.props?.children === 'string') {
+      useAsTitle = shape.label.props.children;
+    }
+  }
+
+  return useAsTitle;
+};
+
+/**
+ * Converts the deprecated children array shapes into breadcrumbs
+ */
+const processShapesArray = (arr) => {
+  return arr.map((shape) => {
+    const { children: label, ...rest } = shape;
+    const href = getHref(shape);
+
+    return { ...rest, href, label };
+  });
+};
+
 /**
  * The BreadcrumbWithOverflow is used internally by the PageHeader to wrap BreadcrumbItems.
  */
 export let BreadcrumbWithOverflow = ({
-  children,
+  breadcrumbs: breadcrumbsIn,
+  children: deprecated_children,
   className,
   maxVisible,
   noTrailingSlash,
@@ -49,41 +97,7 @@ export let BreadcrumbWithOverflow = ({
   const breadcrumbItemWithOverflow = useRef(null);
   const sizingContainerRef = useRef(null);
   const internalId = useRef(uuidv4());
-  const [childArray, setChildArray] = useState([]);
-
-  const getHref = (item) => {
-    // This function should extract href from item
-    // It expects that the href is attached either to the item or direct child
-    // It prefers item.props.href
-    return item?.props?.href
-      ? item.props.href
-      : item?.props?.children?.props?.href;
-  };
-
-  const getTitle = (item) => {
-    // This function should extract text based title from the item.
-    // It prefers in this order
-    // - item.props.data-title
-    // - item.props.title
-    // - item.props.children if string
-    // - item.props.children.props.children if string. This case is likely if an <a /> is used inside a BreadcrumbItem
-    let useAsTitle = null;
-
-    if (item?.props) {
-      /* istanbul ignore next if */ // list represents preferred order with checks, no else case expected
-      if (item.props['data-title']) {
-        useAsTitle = item.props['data-title'];
-      } else if (item.props.title) {
-        useAsTitle = item.props.title;
-      } else if (typeof item.props.children === 'string') {
-        useAsTitle = item.props.children;
-      } else if (typeof item.props?.children?.props?.children === 'string') {
-        useAsTitle = item.props.children.props.children;
-      }
-    }
-
-    return useAsTitle;
-  };
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
 
   // eslint-disable-next-line react/prop-types
   const BreadcrumbOverflowMenu = ({ overflowItems }) => {
@@ -112,44 +126,43 @@ export let BreadcrumbWithOverflow = ({
     );
   };
 
-  // creates child array from children which may be a fragment
   useEffect(() => {
-    setChildArray(unwrapIfFragment(children));
-  }, [children]);
+    const workWith =
+      breadcrumbsIn ??
+      processShapesArray(extractShapesArray(deprecated_children));
+
+    const newBreadcrumbs = workWith.map(({ title, ...rest }) => {
+      return {
+        ...rest,
+        title: title ?? getTitle(rest),
+      };
+    });
+
+    setBreadcrumbs(newBreadcrumbs);
+  }, [breadcrumbsIn, deprecated_children]);
 
   useEffect(() => {
-    // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and childArray
-    if (childArray.length === 0) {
+    // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and breadcrumbs
+    if (breadcrumbs.length === 0) {
       setDisplayedBreadcrumbItems([]);
       return;
     }
 
-    // clones of children needed as the children are used in the sizing render
-    const cloneChildren = (items) => {
-      return items.map((item, index) => {
-        // likely truncated add title
-        const title =
-          index + 1 === childArray.length && displayCount === 1
-            ? getTitle(item)
-            : null;
-
-        const className =
-          index > 0 || displayCount > 1
-            ? cx([
-                childArray[index].props.className,
-                `${blockClass}__displayed-breadcrumb`,
-              ])
-            : childArray[index].props.className;
-
-        return React.cloneElement(item, {
-          key: `clone-${item.key}`,
-          title,
-          className,
-        });
-      });
-    };
-
-    const newDisplayedBreadcrumbItems = cloneChildren(childArray);
+    const newDisplayedBreadcrumbItems = breadcrumbs.map(
+      ({ className, key, label, title, ...rest }, index) => (
+        <BreadcrumbItem
+          key={key}
+          className={
+            index > 0 || displayCount > 1
+              ? cx([className, `${blockClass}__displayed-breadcrumb`])
+              : className
+          }
+          title={index + 1 === breadcrumbs.length ? title : null}
+          {...rest}>
+          {label}
+        </BreadcrumbItem>
+      )
+    );
 
     // The breadcrumb has the form [first item] [overflow] [items 2...(n-1)] [last item].
     // The overflow is only shown if there isn't space to display all the items, and in that case:
@@ -161,7 +174,7 @@ export let BreadcrumbWithOverflow = ({
 
     let newOverflowBreadcrumbItems = newDisplayedBreadcrumbItems.splice(
       overflowPosition,
-      childArray.length - displayCount
+      breadcrumbs.length - displayCount
     );
 
     // if needed add overflow menu
@@ -177,7 +190,7 @@ export let BreadcrumbWithOverflow = ({
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);
-  }, [childArray, displayCount]);
+  }, [breadcrumbs, displayCount]);
 
   const checkFullyVisibleBreadcrumbItems = () => {
     const displayItemIndex = (itemCount, index) => {
@@ -269,7 +282,7 @@ export let BreadcrumbWithOverflow = ({
   useEffect(() => {
     checkFullyVisibleBreadcrumbItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maxVisible]);
+  }, [breadcrumbs, maxVisible]);
 
   /* istanbul ignore next */ // not sure how to test resize
   const handleResize = () => {
@@ -283,14 +296,11 @@ export let BreadcrumbWithOverflow = ({
     checkFullyVisibleBreadcrumbItems();
   };
 
-  let backItem = childArray[childArray.length - 1];
+  let backItem = breadcrumbs[breadcrumbs.length - 1];
   /* istanbul ignore next if */ // not sure how to test media queries
-  if (backItem?.props?.isCurrentPage) {
-    backItem = childArray[childArray.length - 2];
+  if (backItem?.isCurrentPage) {
+    backItem = breadcrumbs[breadcrumbs.length - 2];
   }
-
-  const buttonHrefValue = getHref(backItem);
-  const buttonTooltipValue = getTitle(backItem);
 
   useResizeDetector({
     onResize: handleBreadcrumbItemsResize,
@@ -321,17 +331,21 @@ export let BreadcrumbWithOverflow = ({
                 renderIcon={OverflowMenuHorizontal32}
               />
             </BreadcrumbItem>
-            {children}
+            {breadcrumbs.map(({ label: children, key, ...rest }) => (
+              <BreadcrumbItem key={key} {...rest}>
+                {children}
+              </BreadcrumbItem>
+            ))}
           </Breadcrumb>
         </div>
 
-        {buttonHrefValue && buttonTooltipValue && (
+        {backItem?.href && backItem?.title && (
           <Button
             className={`${blockClass}__breadcrumb-back-button`}
             hasIconOnly
-            iconDescription={buttonTooltipValue}
+            iconDescription={backItem.title}
             kind="ghost"
-            href={buttonHrefValue}
+            href={backItem.href}
             renderIcon={ArrowLeft16}
             size="field"
             tooltipPosition="right"
@@ -358,11 +372,49 @@ BreadcrumbWithOverflow = pkg.checkComponentEnabled(
   componentName
 );
 
-BreadcrumbWithOverflow.propTypes = {
+export const deprecatedProps = {
   /**
+   * **Deprecated** see property `breadcrumbs`
+   *
    * children of the breadcrumb-item set (these are expected to be breadcrumb-items)
    */
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: deprecateProp(
+    PropTypes.arrayOf(PropTypes.element),
+    'Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.'
+  ),
+};
+
+BreadcrumbWithOverflow.propTypes = {
+  breadcrumbs: PropTypes.arrayOf(
+    PropTypes.shape({
+      /**
+       * Optional string representing the link location for the BreadcrumbItem
+       */
+      href: PropTypes.string,
+
+      /**
+       * Provide if this breadcrumb item represents the current page
+       */
+      isCurrentPage: PropTypes.bool,
+
+      /**
+       * Key required to render array efficiently
+       */
+      key: PropTypes.string.isRequired,
+
+      /**
+       * Pass in content that will be inside of the BreadcrumbItem
+       */
+      label: PropTypes.node,
+
+      /**
+       * A string based alternative to the children, required only if children is not of type string.
+       */
+      title: PropTypes.string.isRequired.if(
+        ({ label }) => typeof label !== 'string'
+      ),
+    })
+  ),
   /**
    * className
    */
@@ -379,6 +431,7 @@ BreadcrumbWithOverflow.propTypes = {
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
   overflowAriaLabel: PropTypes.string.isRequired,
+  ...deprecatedProps,
 };
 
 BreadcrumbWithOverflow.defaultProps = {

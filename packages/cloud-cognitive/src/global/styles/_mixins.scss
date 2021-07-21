@@ -16,7 +16,7 @@
   top: -100vh; // off screen
   left: -100vw; // off screen
   overflow: hidden;
-  max-width: 0; // do not take up space.
+  max-width: 100vw; // NOTE: resize only detected if < 100vw
   pointer-events: none;
   visibility: hidden;
 }

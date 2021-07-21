@@ -15,11 +15,19 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 const dataTestId = uuidv4();
 
-const breadcrumbContent = [];
-for (let i = 1; i <= 5; i++) {
-  breadcrumbContent.push(`Breadcrumb ${i}`);
-}
-const breadcrumbItems = breadcrumbContent.map((item) => (
+const breadcrumbContent = Array.from(
+  { length: 5 },
+  (_, index) => `Breadcrumb ${index + 1}`
+);
+
+const breadcrumbItems = breadcrumbContent.map((item) => ({
+  href: '/#',
+  key: item,
+  label: item,
+  onClick: () => {},
+}));
+
+const deprecatedChildren = breadcrumbContent.map((item) => (
   <BreadcrumbItem key={item}>
     <a href="/#" onClick={() => {}}>
       {item}
@@ -109,9 +117,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     render(
       <TestBreadcrumbWithOverflow
         width={plentyOfSpace}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -131,9 +139,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     render(
       <TestBreadcrumbWithOverflow
         width={notEnoughSpace}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -170,9 +178,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     render(
       <TestBreadcrumbWithOverflow
         width={notEnoughSpace}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -192,9 +200,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={3}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -209,14 +217,14 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(overflowBtn).toBeTruthy();
   });
 
-  it('Renders just the breadcrumb obeying maxVisible', () => {
+  it('Renders just the breadcrumb overflow and title using maxVisible 0', () => {
     render(
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -237,14 +245,38 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         data-test-id={dataTestId}
         width={1200}
         maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
     screen.getByTestId(dataTestId);
   });
 
+  it('Works with deprecated children', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
+
+    render(
+      <TestBreadcrumbWithOverflow
+        width={plentyOfSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        {deprecatedChildren}
+      </TestBreadcrumbWithOverflow>
+    );
+
+    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    expect(visibleBreadcrumbs.length).toEqual(5); // all should be visible
+
+    breadcrumbContent.forEach((item, index) => {
+      expect(visibleBreadcrumbs[index]).toHaveTextContent(item);
+    });
+
+    expect(warn).toBeCalled();
+    jest.spyOn(console, 'warn').mockRestore();
+  });
+
   it('Uses data-title if supplied', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     const testTitle = 'test-title';
 
     render(
@@ -260,9 +292,11 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       </TestBreadcrumbWithOverflow>
     );
     expect(screen.getByText(testTitle)).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
   });
 
   it('Uses title if supplied', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     const testTitle = 'test-title';
 
     render(
@@ -278,9 +312,11 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       </TestBreadcrumbWithOverflow>
     );
     expect(screen.getByText(testTitle)).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
   });
 
   it('Uses props.children as title if type string', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     const testTitle = 'test-title';
 
     render(
@@ -300,9 +336,11 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         selector: `.${carbon.prefix}--assistive-text`,
       })
     ).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
   });
 
   it('Uses props.children.props.children type string', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     const testTitle = 'test-title';
 
     render(
@@ -322,5 +360,6 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         selector: `.${carbon.prefix}--assistive-text`,
       })
     ).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
   });
 });
